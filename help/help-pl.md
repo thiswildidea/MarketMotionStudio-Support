@@ -1,0 +1,503 @@
+# Market Motion Studio
+
+Ta aplikacja zamienia wskaźniki rynku akcji A w pionowe filmy na telefon. Wybierasz okres, patrzysz na podgląd, aż da się go dobrze odczytać, i eksportujesz plik MP4. Nic więcej nie trzeba instalować.
+
+## Wybór rynku
+
+W ustawieniach wybiera się, z którego rynku aplikacja pobiera notowania; domyślnie akcje A. Zmiana działa po ponownym uruchomieniu aplikacji.
+
+- **Akcje A**: dostępnych jest wszystkich osiem stron.
+- **Hongkong**: macierz stóp zwrotu i kalendarz działają; wyścig sektorów korzysta z czterech subindeksów Hang Seng; **nie ma danych dla całego rynku, więc ta strona jest ukryta**.
+- **USA**: macierz stóp zwrotu i kalendarz działają; wyścig sektorów korzysta z dziesięciu sektorowych ETF-ów SPDR; strona wolumenu ma tylko tryb dzienny, bo minutowy endpoint nie obsługuje danych z USA; **kwoty są w dolarach, a strona obrotu całego rynku jest ukryta**.
+
+
+
+## Przechodzenie między stronami
+
+Dwa przyciski po lewej stronie paska tytułu cofają się i przesuwają do przodu po odwiedzonych stronach, tak jak robi to przeglądarka — **Alt+Strzałka w lewo** i **Alt+Strzałka w prawo** albo boczne przyciski myszy.
+
+- Strona pozostaje taka, jak ją zostawiono, więc powrót do niej przywraca wybrany okres i podgląd w takim stanie, w jakim były, a nie świeżo otwartą stronę.
+- Jak w przeglądarce: wybranie nowej strony czyści to, co było przed Tobą.
+- Działają także przy zwiniętym panelu nawigacji, czyli wtedy, gdy podgląd najbardziej potrzebuje szerokości.
+
+## Obroty rynku
+
+Dzienne obroty całego rynku: kwoty indeksów zbiorczych z Szanghaju i Shenzhen zsumowane, jeden słupek na sesję.
+
+- Zostają tylko dni, w których handlowały wszystkie uwzględnione rynki, żeby święto na jednym z nich nie sprawiało wrażenia, że suma się załamała.
+- Sesja wciąż trwająca jest pomijana. Niedokończony dzień zawiera tylko swój fixing otwarcia i narysowałby się jako słupek przyklejony do osi.
+- Albo patrzeć na jeden segment: każdą giełdę, każdy rynek główny, STAR, ChiNext. Rynki główne wyliczono jako sumę giełdową minus rynek wzrostu; BSE 50 pozostaje miarą składników.
+- Sumę dla całego rynku daje tylko rynek akcji A. Po wyborze Hongkongu lub USA strona znika z nawigacji.
+
+- **Twoja lista.** Ostatnia pozycja menu to lista, którą prowadzisz — indeksy i akcje obok siebie,
+  współdzielona z czterema tablicami roster. Sumować można tylko kody z kontynentu: obroty są
+  podawane w walucie każdego rynku, więc nazwa z Hongkongu lub Nowego Jorku wypada, a wiersz
+  stanu mówi, ile. Dzień jest na osi, gdy *ktokolwiek* z członków handlował; członek bez wiersza
+  za ten dzień — zawieszony albo jeszcze nienotowany — wnosi zero. To celowo odwrotność reguły
+  tablic powyżej: indeks nigdy nie zostaje zawieszony, akcja tak, a usunięcie dnia sprawiłoby, że
+  zawieszenie wygląda jak dzień, w którym nigdzie nie handlowano. Ta tablica **sumuje swoje
+  pozycje**, więc kliknięcie nazwy dolicza ją do sumy lub pomija, a otwiera się tylko z **pierwszą**.
+  Lista bywa budowana pod rankingi, gdzie kilkanaście nazw to norma; kilkanaście zsumowanych to
+  liczba o nikim.
+- **Zmiana pod koszykiem** to średnia ważona równo dziennych zmian poszczególnych członków,
+  każda wobec własnego poprzedniego zamknięcia. Ważona równo, bo lista to nie portfel: nie ma
+  wielkości pozycji, według której można by ważyć.
+- **Jedna sesja, minuta po minucie.** Trzecia forma to osobne pobranie: narastająca suma od
+  otwarcia do zamknięcia jednego dnia. Źródło trzyma tylko pięć ostatnich sesji, więc nie ma
+  wyboru zakresu — obraz podaje dzień, który narysował. Krzywa kończy się o 15:00, bo pół godziny
+  dodane potem przez endpoint to handel po sesji, którego nie ma też w liczbie dziennej. Cztery
+  karty to suma dnia oraz udziały przedpołudnia, popołudnia i ostatnich trzydziestu minut — wykres
+  tego, *kiedy* pieniądz się poruszył, więc trzy z czterech kart to udziały, a nie kwoty. BSE 50
+  to jedyna tablica zwracająca minuty bez kolumny obrotu i jest odrzucana, a nie liczona jako
+  zero.
+
+## Wykres świecowy
+
+Świece jednego instrumentu: dzienne, tygodniowe lub miesięczne — albo minutowe dla jednego wybranego dnia sesji — rysowane na cztery sposoby, ze średnimi i wolumenem poniżej.
+
+- **Interwał** decyduje, jaki czas rynkowy obejmuje jedna świeca: dzień, tydzień lub miesiąc. Zmiana go pobiera dane ponownie, bo na źródle to trzy osobne serie.
+- **1, 5 i 15 minut** rysują jeden dzień sesji: od otwarcia do zamknięcia, na osi według zegara, która pomija dziewięćdziesiąt minut bez handlu, więc przedpołudnie i popołudnie stykają się na cienkiej linii zamiast zostawiać pustą jedną trzecią obrazu. Źródło trzyma świece minutowe tylko dla Szanghaju i Shenzhen i tylko za ostatnie sesje — około czterech dni przy jednej minucie, siedemnastu przy pięciu, pięćdziesięciu przy piętnastu — więc **Dzień sesji** to lista dni, które jeszcze ma, a nie kalendarz. Wybór innego dnia tylko przerysowuje.
+- **Rodzaj wykresu** decyduje, jak te same cztery ceny są rysowane: świece, słupki OHLC, linia zamknięcia lub obszar zamknięcia. Przełączanie niczego nie pobiera.
+- **Animacja** to pojawianie się świec jedna po drugiej, aż cały zakres zostanie narysowany, albo stałe okno, które przesuwa się w przód. To drugie sprawia, że świeca na długim zakresie zostaje dość szeroka do odczytania, a jej szerokość to ustawienie **Okno**.
+- **Przesuwne okno otwiera się na końcu.** Wraz z początkiem końcowego odcinka okno rozszerza się wstecz aż do pierwszego dnia zakresu, więc klatka, na której animacja się zatrzymuje, pokazuje cały zakres, a nie jego ostatnie kilkadziesiąt dni.
+- Średnie kroczące MA5, MA10 i MA20 można nałożyć na świece; panel wolumenu poniżej można wyłączyć, a panel ceny odzyskuje to miejsce.
+- Tydzień lub miesiąc wciąż trwający zostaje pominięty. Świeca złożona z trzech dni nie jest tygodniem.
+- Każdy rynek jest czytany na swojej serii skorygowanej, więc dzień splitu nie jest rysowany jako spadek, tak samo jak dywidenda.
+- **Zakres** zależy od interwału: dzienny daje 3, 6 lub 12 miesięcy albo 3, 5 lub 10 lat; tygodniowy 1, 3, 5 lub 10 lat; miesięczny 3, 5 lub 10 lat lub maksimum, jakie ma źródło (około 13). Jedno żądanie przynosi około 640 świec dziennych, a strona cofa się strona po stronie, więc dziesięć lat — około 2.500 świec — mieści się w tym.
+- **Dwa instrumenty lub więcej zamieniają kadr w porównanie.** Nazwy na twojej liście to przełączniki: włącz drugą, a kadr przestanie rysować świece — ceny dwóch instrumentów nie mają żadnej osi, którą mogłyby dzielić — i zamiast tego narysuje to, co każdy z nich zrobił, jako narastający procent. Każda krzywa jest opisana na własnym przednim końcu: nazwą oraz tym, o ile jest z przodu lub z tyłu w pokazywanym momencie. W okresach minutowych wszystkie są rysowane w tym samym dniu sesji: **Dzień sesji** wylicza te, które mają wszystkie, domyślnie najnowszą pełną sesję, a krzywe liczy się od **poprzedniego zamknięcia** — liczba na końcu to więc dzienna zmiana każdego instrumentu.
+- **Kilka instrumentów może dzielić jeden wykres albo mieć własny.** Przy **Układ** ustawionym na „wykres dla każdego” każdy instrument dostaje własny panel, jeden pod drugim, z osią skalowaną do własnego zakresu i linią zera w środku; oś x i daty są wspólne i rysowane raz, pod dolnym panelem. Widok dzielony mieści trzy, więc przy większej liczbie wybranych rysowane są trzy pierwsze z listy, a pozostałe są wymienione na pasku stanu. Przełączanie układów niczego nie pobiera ponownie. W obu układach na dole kadru jest jedna karta na instrument: dużymi cyframi jego **zmiana w okresie**, a pod nią, o ile punktów — albo o ile pieniędzy — się ruszył; ta sama liczba, którą pokazuje etykieta na końcu jego krzywej.
+- **Pas po prawej stronie można oddać, jeśli zależy ci na szerokości.** Domyślnie jest wyłączony: platforma rysuje tam swój awatar oraz przyciski „lubię to” i komentarzy w pionowym wideo, a świece i końce krzywych rysowane pod nimi są na telefonie zasłonięte, choć tutaj widać je bez problemu. Włączony: oba obrazy rysowane przez tę stronę sięgają własnej krawędzi kadru — świece aż do niej, a wraz z nimi nazwa i liczba na końcu krzywej porównania; przesuwne okno zachowuje odstęp, dopóki jest oknem, i wraz z oknem rozwiera się na pełną szerokość.
+- **Porównanie mówi, do którego dnia doszło.** Okresy minutowe (1, 5 i 15) piszą dwie linijki pod nagłówkiem: u góry ten **jeden dzień sesji**, pod nim **godzinę, do której kadr właśnie doszedł** —— posuwa się wraz z obrazem minuta po minucie. Okresy dzienny, tygodniowy i miesięczny piszą tylko górną linijkę: **dzień, do którego kadr właśnie doszedł** —— posuwa się wraz z obrazem dzień po dniu. Ten blok dostają tylko kadry z kilcoma instrumentami —— kadr z jednym instrumentem już nosi datę rysowanej świecy w nagłówku.
+
+## Wolumen i obrót
+
+Wolumen jednej spółki na tle jej wskaźnika obrotu, w dwóch panelach jeden nad drugim.
+
+- Z sesji na sesję wolumen i wskaźnik obrotu są proporcjonalne, więc oba panele mają niemal ten sam kształt. W ciągu jednego dnia wolumen minutowy i narastający obrót wyglądają naprawdę inaczej, i to jest ciekawszy obraz.
+- Źródło danych śróddziennych trzyma tylko ostatnie sesje, więc ten tryb proponuje właśnie je, a nie dowolną datę.
+- Dane minutowe są dostępne tylko dla akcji A i Hongkongu; w USA ten tryb nie jest oferowany.
+- W interwale dziennym zakres to 1, 3, 6, 12 lub 24 miesiące albo własne daty początku i końca; zakres niestandardowy kończy się na około 900 dniach kalendarzowych — tyle zwraca jedno żądanie — i wybór dat kończy się w tym samym miejscu. Tryb intraday pozwala wybrać jeden z kilku dostępnych dni.
+
+## Wyścig sektorów
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/sector-race.png)
+
+Zbiór sektorów lub akcji jako poziome paski, które wyprzedzają się nawzajem, a kolejność zmienia się aż do ostatniej klatki.
+
+- Dwa wskaźniki: zmiana z okresu w % oraz obrót w setkach milionów juanów. Przełączenie wskaźnika tylko przekolorowuje te same dane; nie pobiera ich ponownie.
+- Cztery listy: branże Shenwan poziomu 1, popularne tematy, własna (zaznacz), pojedyncze akcje (dodaj przez wyszukiwanie). Własna lista startuje wypełniona branżami Shenwan poziomu 1.
+- Wbudowane listy zmieniają się wraz z rynkiem: branże Shenwan poziomu 1 i popularne tematy dla akcji A, cztery subindeksy Hang Seng dla Hongkongu, dziesięć sektorowych ETF-ów SPDR dla USA. Lista własna i lista akcji są na każdym rynku.
+- Zakres to 1, 3, 6, 12 lub 24 miesiące albo dowolna data początkowa i końcowa. Własny zakres sięga około 900 dni — tyle, ile obejmuje jedno żądanie — i tam kończą się selektory dat.
+- Lista ma minimalną i maksymalną liczbę pozycji — za mało pasków to nie wyścig, za dużo się zleje.
+
+
+
+
+## Wyścig kapitalizacji
+
+Piętnaście największych spółek danego rynku jako poziome słupki uszeregowane według
+kapitalizacji; kolejność zmienia się do ostatniej klatki. Próbkowanie miesięczne.
+
+- **Ranking jest liczony od nowa w każdym okresie.** Pobranie najpierw pyta źródło o bieżący
+  ranking według kapitalizacji, bierze pierwsze dwieście jako grono i dodaje duże spółki, które
+  kiedyś były w rankingu, a z niego wypadły; każdy okres pokazuje potem piętnaście największych z
+  tego grona. Skład naprawdę się zmienia — w 2016 roku to była ropa i banki, w 2026 doszły 茅台,
+  宁德时代 i 工业富联. Grono zapisane w programie pominęło spółkę, która zadebiutowała i od razu
+  wskoczyła na szczyt; teraz grono jest pytane, a nie pamiętane.
+- **Dawna kapitalizacja jest wyliczana**: dzisiejsza kapitalizacja razy skorygowany stosunek cen
+  z okresu. Emisje i splity znoszą się w skorygowanej serii; dywidendy nie — są reinwestowane,
+  więc dawna wartość hojnego płatnika wypada nisko. Tylko liczba z ostatniej klatki pochodzi
+  wprost ze źródła.
+- **Spółka jeszcze nienotowana rośnie od zera**: debiuty z 2018 roku wyrastają z linii bazowej
+  w dniu wejścia, zamiast zajmować miejsce zawczasu.
+- **Odstęp to miesiąc, nie dzień** — sto dwadzieścia okresów na dziesięć lat, dwanaście na rok,
+  a nagłówek klatki liczy miesiące. Ranking kapitalizacji zmienia się powoli, a próbka miesięczna
+  dostaje całą historię w jednym zapytaniu.
+- **Każdy rynek ma swoje piętnaście.** Trzech nigdy się nie miesza: ich pieniądz to nie ten sam
+- Zakres to ostatnie 12 miesięcy, 3, 5 lub 10 lat albo **Najdłuższy** — jedno żądanie zwraca wszystkie 180 okresów miesięcznych, około piętnastu lat, i tam kończy się ta pozycja. Możesz też podać własne daty początku i końca.
+  pieniądz. Hongkong i Nowy Jork mają stałe grono, bo żaden dostępny tej aplikacji ranking ich nie
+  obsługuje.
+
+
+
+
+
+## Historia wartości rynkowej
+
+Wartość rynkowa akcji w obrocie dzień po dniu, a pod nią kurs na tej samej osi czasu. Albo kilka spółek naraz — każda jedną linią, podpisaną na końcu.
+
+- **Wartość jest odtwarzana, nie podawana.** Źródło nie ma historycznej liczby akcji dla żadnego dnia. Wynika ona ze wskaźnika rotacji, który jest ułamkiem akcji w obrocie — więc `wolumen ÷ wskaźnik rotacji` *to* ta liczba, a wartość to kurs dnia razy ona.
+- **Pas po prawej stronie można oddać, jeśli zależy ci na szerokości.** Domyślnie jest wyłączony: platforma rysuje tam swój awatar oraz przyciski „lubię to” i komentarzy w pionowym wideo, a liczba pod nimi jest na telefonie zasłonięta, choć tutaj widać ją bez problemu. Włączony: panele rysują do samej krawędzi kadru, a wykres jest tak szeroki jak kadr.
+
+- **Liczba to mediana z dwudziestu dni.** Wskaźnik ma dwa miejsca po przecinku, więc jeden dzień niesie około procentu szumu, podczas gdy liczba akcji to schody: rusza się przy emisji lub skupie i stoi w miejscu pomiędzy. Mediana zostawia stopień w dniu, w którym powstał.
+
+- **Liczone są tylko akcje handlowane na tym rynku.** Te, które spółka notuje gdzie indziej, są pominięte, więc przy podwójnym notowaniu linia jest poniżej „całkowitej kapitalizacji” z aplikacji z notowaniami — tamte akcje wycenia się po cenie tego rynku. Różnica w ICBC to w całości akcje H. Pominięte są też akcje nadal objęte blokadą.
+
+- **W Hongkongu cena to średnia transakcji.** Ten rynek nie daje kursu zamknięcia bez korekty, więc cena to obrót podzielony przez wolumen, a dolny panel nazywa się „średnia cena transakcji”.
+
+- **Nowy Jork dzieli przez wszystkie akcje, nie przez te w obrocie.** Jego wskaźnik jest ułamkiem wszystkich akcji spółki, także należących do osób związanych, więc linia jest tam wartością całkowitą, nie będącą w obrocie: liczba przewyższa wartość z aplikacji dokładnie o udział tych osób — w Apple o zero, w NVIDIA o 4%, w Tesli o 12%. Sięga do 2009 roku, tak samo głęboko jak w Chinach.
+
+- **Dziesięcioletnia krzywa wygląda, jakby kiedyś spadła do zera — nie spadła.** Oś musi pomieścić szczyt, więc wczesny odcinek wart jedną dziesiątą leży kilka pikseli nad podstawą: 853 億 dla 五粮液 przy szczycie 13 097 億 to poniżej siedmiu procent jego wysokości. Dlatego znaczniki minimum i maksimum podają swoją liczbę: goły punkt tam na dole czyta się jako zero.
+
+- **Liczba jedzie na linii.** Etykieta na końcu każdej linii podaje nazwę spółki i wartość, jaką osiągnęła w tej chwili, i porusza się razem z animacją — przeciągnij suwak, a pojedzie z linią. Przy jednej spółce oba panele mają po jednej etykiecie, wartość i cenę, a duża liczba nad panelem podaje tę samą liczbę; przy kilku etykiety są też tym, co pozwala odróżnić linie od siebie.
+
+- Zakres: jeden, dwa, pięć lub dziesięć lat, albo dwie własne daty.
+
+Porównaj kilka spółek naraz. Po zaznaczeniu więcej niż jednego chipa każda dostaje własną linię, podpisaną na końcu. Kursy kilku spółek nie dzielą uczciwie jednej osi cen — postaw 贵州茅台 obok 京东方A, a jedna z nich jest płaską linią przy dolnej krawędzi — więc dolny panel ustępuje i cały kadr należy do wartości rynkowej. Do sześciu; siódma zostaje odrzucona zamiast pominięta po cichu, bo wykres z sześciu spośród siedmiu zaznaczonych spółek odpowiada na listę, której nikt nie wybrał.
+
+Oś wartości ma dwa odczyty. Bezwzględna mówi, która spółka jest warta więcej; przeliczona na 100 w pierwszym dniu każdej z nich — czyja wartość rosła szybciej, i to jest jedyny czytelny odczyt, gdy jedna jest wielokrotnością drugiej. W obu przypadkach oś dat to suma ich dni, nie część wspólna: część wspólna ścięłaby dziesięcioletnie porównanie do okresu najpóźniejszego debiutu.
+
+
+
+## Premia A/H
+
+O ile droższe jest notowanie kontynentalne spółki od jej notowania w Hongkongu — dla spółek
+notowanych po obu stronach, miesiąc po miesiącu, jako słupki, które się wyprzedzają.
+
+- **Premia = kurs A ÷ (kurs H × HKD/CNY) − 1.** Nic tu nie jest wyliczane: obie nogi to kursy
+  faktycznie płacone w tym samym momencie, dlatego ta strona jako jedyna pobiera kursy
+  **nieskorygowane**. Seria korygowana wstecz zawyża ostatnie kursy, a dwóch rynków korygowanych
+  osobno nie da się porównać — akcja A ICBC kosztuje 8,28 na ekranie, a skorygowana seria podaje
+  13,34, zamieniając premię +26% w +245%.
+- **Tę samą różnicę zapisuje się w obie strony.** Ta strona podaje A do H, czyli formę przyjętą w
+  branży: +194% znaczy, że akcja kontynentalna kosztuje prawie trzy razy tyle co hongkońska.
+  Niektóre serwisy pokazują tę samą liczbę odwrotnie (溢价(H/A)) i dla 新华制药 dają −66% tego
+  samego dnia. To ten sam fakt (1 ÷ (1 − 0,66) − 1 = 1,94), a nie inny kurs ani błąd.
+- **Rysowane jest piętnaście najdroższych**, więc słupki rosną w prawo — nawet piętnasta miała
+  ponad dwadzieścia procent. Tylko dwie z sześćdziesięciu dziewięciu idą w drugą stronę, ich akcje
+  H ponad akcjami A, i obie stoją na końcu listy, poza kadrem.
+- **Im dłuższy okres, tym mniej spółek się kwalifikuje.** Kandydatów jest sześćdziesiąt dziewięć
+  znanych podwójnych notowań, ale rysowana jest tylko para, której obie nogi pokrywają cały okres:
+  notowanie w Hongkongu młodsze niż dwa lata wypada.
+- **Próbkowanie miesięczne.** „Najdłuższy" to około dziewięciu lat, a granicą jest seria kursu
+  walutowego sięgająca tylko 2016 roku. Trzy nogi kończą miesiąc w różnych dniach, więc grupujemy po
+  miesiącu kalendarzowym i bierzemy ostatni kurs miesiąca, zamiast przecinać po dacie.
+- **Lista jest wbudowana.** Żadne z dwóch źródeł nie odpowiada na pytanie „które notowania
+  kontynentalne mają też notowanie w Hongkongu". Jest za to sprawdzalna: każdą parę odczytano
+  ponownie ze źródła 2026-10-02, a 海通证券 wypadło właśnie wtedy (akcje H wycofane po fuzji z
+  国泰海通).
+
+## Ekstremalne dni
+
+Jeden instrument i dni, w których poruszył się najmocniej — poziome słupki uporządkowane
+według wielkości. **Wierszami tej tablicy są dni, nie spółki**, czego nie robi żadna inna strona:
+wartością wiersza jest ruch z danego dnia względem zamknięcia poprzedniej sesji i gdy ten dzień
+minie, wartość już się nie zmienia.
+
+- **Ruch to zmiana skorygowanej ceny zamknięcia.** Skorygowanej, bo dzień odcięcia dywidendy nie
+  jest krachem: tego ranka cena spada o dywidendę, a seria bez korekty umieściłaby ten dzień na
+  czele największych spadków w historii, choć nikt nic nie stracił.
+- **Uporządkowane według wielkości, nie według znaku.** −7,7 % i +8,1 % to ruchy tej samej
+  wielkości, więc stoją obok siebie; sortowanie wartości ze znakiem umieściłoby każdy spadek pod
+  każdym wzrostem. Słupki rosną więc w obie strony: **wzrost w prawo, na czerwono; spadek w lewo,
+  na zielono**.
+- **Dzień liczy się dopiero, gdy nadejdzie.** Dwudziestu czterech kandydatów to największe ruchy
+  okresu, a kadr rysuje piętnaście największych z nich. Dzień nie bierze udziału w rankingu, póki
+  nie nadejdzie jego data, więc tablica zapełnia się wraz z latami zamiast być pełna od początku.
+- **Dowolny instrument notowany na tym rynku, nie tylko szerokie indeksy.** Wpisz kod, nazwę lub
+  pinyin w polu wyszukiwania: pojedyncza akcja i fundusz notowany na giełdzie pasują tu tak samo jak
+  indeks, a lista poniżej to tylko skrót do najczęstszych. Zmiana rynku podmienia tę listę i porzuca
+  instrument z innego rynku; wybór instrumentu lub zakresu zapisuje tylko preferencję — nic nie jest
+  pobierane, dopóki nie naciśniesz 取数.
+- **Najdłuższy okres to około trzydzieści pięć lat**, co jest ograniczeniem źródła: jedno żądanie
+  niesie około 640 świec dziennych, a cofanie wykonuje się najwyżej dwadzieścia razy. Okres
+  krótszy niż sześćdziesiąt sesji jest odrzucany — największy dzień spokojnego miesiąca to nie jest
+  fakt wart tablicy.
+- **Data u góry kadru to oś czasu**, a pasek pod nią to postęp. Wiersz nagłówka niesie okres,
+  liczbę sesji i liczbę dni kandydackich.
+
+## Korytarze walutowe
+
+Jeden wiersz na parę, i **ten wiersz jest korytarzem**: jeden koniec to najniższy poziom, na
+jakim para była w wybranym okresie, drugi — najwyższy, a znacznik to kurs z dziś. Ta tablica nie jest
+więc jak inne — gdzie indziej długość słupka mówi *ile*, tu wiersz w każdej klatce zajmuje całą
+szerokość, a porusza się znacznik wraz z korytarzem wokół niego.
+
+- **Korytarz się rozszerza.** Jego ściany to najniższe i najwyższe **dotąd**, nie w całym okresie.
+  Miesiąc, który wyjdzie dalej niż wszystkie wcześniejsze, wypycha jedną ze ścian, a para na 100%
+  jest najdroższa, jaka kiedykolwiek była — nie przy jakimś limicie.
+- **Każda para mierzona jest własnym zakresem.** 157,92 na USD/JPY i 1,1245 na EUR/USD to nie dwa
+  punkty na jednej skali; to normalizacja pozwala sześciu parom stanąć na jednym obrazie. Ceną jest
+  to, że wąski i szeroki korytarz wyglądają tak samo — dlatego obie wartości są wypisane pod każdym
+  wierszem.
+- **Świece miesięczne, bez korekty.** Waluta nie ma dywidendy ani podziału do skorygowania, a strona
+  idzie tą samą surową ścieżką do źródła co strona A+H.
+- **Zasięg danych jest różny, dlatego są dwie listy**: USD/CNY sięga 2005, pozostałe pięć par
+  renminbi — 2016; główne crossy zaczynają się wszystkie w 2005-07 i mają po 325 miesięcy. Na jednej
+  tablicy czytałoby się, od kiedy źródło zaczęło notować każdą parę.
+- **Ustawienie rynku tu nie działa**: para walutowa nie należy do żadnej giełdy, a tablica jest ta
+  sama niezależnie od wybranego rynku.
+- Najdłuższy okres to około dwudziestu lat — tyle obejmują miesięczne dane źródła. Mniej niż
+  dwanaście miesięcy jest odrzucane: to kilka tygodni ruchu, nie korytarz.
+
+## Wyścig indeksów
+
+Jeden wiersz na indeks, a wiersz to **jak daleko ten indeks zaszedł od swojego pierwszego
+miesiąca w okresie** — nie jego poziom. 3 800 na Shanghai Composite i 5 700 na S&P 500 to nie dwa
+punkty na jednej skali; rysowanie poziomów byłoby tablicą o tym, gdzie który indeks zaczął liczyć.
+
+- **Indeks, który przychodzi później, nie ma go na tablicy, dopóki nie przyjdzie.** S&P sięga 1950,
+  Dow tylko 2009, a indeks Hang Seng Tech zaczyna się w 2020. Brakuje go, a nie stoi na 0,00% — tam
+  znalazłby się nad każdym indeksem, który kiedykolwiek spadł, i czytałoby się to jako rynek, na
+  którym nic się nie wydarzyło.
+- **Miesięcznie, i teraz już z korektą.** Indeks nic nie wypłaca, ale akcja płaci dywidendy i
+  dzieli swoje udziały: Apple pokazuje +193 % w dziesięć lat bez korekty i +1183 % z korektą, bo
+  linia bez korekty niesie urwiska, z których żaden posiadacz nigdy nie spadł. Indeksów to nie
+  dotyka — poproszona o korektę, źródło odpowiada indeksowi tymi samymi wierszami co zwykle, i
+  wszystkie dwanaście wyszły identycznie obiema drogami. To, co tablica teraz niesie, to różnica
+  warta wypowiedzenia: wiersz indeksu to zwrot **cenowy**, bo indeks nie jest pozycją, a wiersz
+  akcji to zwrot **całkowity**, z dywidendami i podziałami wliczonymi.
+- **Ustawienie rynku tu nie rządzi**: strona czyta trzy rynki naraz, a zmiana rynku jej nie zmienia.
+  Można wziąć sześć z kontynentu, trzy z Hongkongu, trzy z Nowego Jorku albo wszystkie dwanaście.
+- Najdłuższy okres ogranicza miesięczny sufit źródła — 430 świec, około trzydziestu pięciu lat;
+  mniej niż dwanaście miesięcy jest odrzucane: to sprint, nie bieg długi.
+- **Albo własna lista.** Ostatnia grupa w menu to lista własna: wpisz kod, nazwę lub pinyin, aby
+  dodać jeden walor, i akcja z kontynentu, z Hongkongu oraz z Nowego Jorku mogą być na niej razem
+  — ta tablica nigdy nie pyta o ustawienie rynku. Jedna lista dla czterech tablic: akcję dodaną tu
+  znajdziesz też w wyścigu aktywów, w obsunięciach i w skuteczności trzymania. Poniżej trzech
+  pobieranie jest odrzucane.
+
+## Klasy aktywów
+
+Jeden wiersz na klasę aktywów, a wiersz to **ile zarobiło trzymanie** — nie notowanie. Wszystkie
+osiem to fundusze notowane na giełdzie kontynentalnej, kupione za te same pieniądze, więc można je
+porównywać wprost.
+
+- **Dywidendy są wliczone, i podziały też.** Obligacja i fundusz rynku pieniężnego płacą prawie
+  wyłącznie dochodem: cena funduszu rynku pieniężnego przeszła w trzynaście lat ze 100,161 do
+  100,901, co bez korekty jest +0,0% — narysowałoby na dole tablicy jedyny wiersz, który nigdy nie
+  spadł. Fundusz po podziale jednostek jest bardziej jaskrawy: ETF Nasdaq ma bez korekty +136%,
+  podczas gdy indeks, który naśladuje, w tej samej dekadzie wzrósł sześciokrotnie.
+- **Celowo odwrotność wyścigu indeksów.** Indeks nie płaci dywidend, więc tamta strona zostaje
+  nietknięta; fundusz płaci, więc tę trzeba korygować. Tych dwóch dróg się nie miesza.
+- **Dwa zagraniczne wiersze niosą kurs.** ETF-y Nasdaq i Hang Seng są notowane w juanach, więc
+  waluta jest już w środku — to właśnie dostał posiadacz z kontynentu.
+- **Początki się różnią.** Najwcześniejszy wiersz zaczyna się w 2012, a fundusz towarowy dopiero w
+  2019. Wiersza, który jeszcze nie wszedł, nie ma — nie stoi na 0,00%.
+- **Ustawienie rynku tu nie rządzi**: wszystkie osiem jest notowanych na kontynencie. Mniej niż
+  dwanaście miesięcy jest odrzucane.
+- **Albo własna lista.** Ostatnia grupa w menu to lista własna: wpisz kod, nazwę lub pinyin, aby
+  dodać jeden walor, a trzy rynki można na niej mieszać. Jedna lista dla czterech tablic: akcję
+  dodaną tu znajdziesz też na trzech pozostałych; pobiera się ją z korektą, dokładnie jak osiem
+  funduszy, więc dywidendy i podziały są w liczbie. Poniżej trzech pobieranie jest odrzucane.
+
+## Rynek obligacji
+
+Jeden wiersz na indeks obligacji, a słupek to **zmiana ceny** — co nie jest tym samym co zarobek
+z trzymania.
+
+- **Kuponu nie ma w liczbie.** Wszystkie dziewięć wierszy to indeksy, a źródło ignoruje parametr
+  korekty dla indeksu, więc wraca notowanie. Obligacja wypłaca większość zwrotu jako kupon, a kupon
+  nigdy nie pojawia się w notowaniu: posiadacz zarobił więcej, niż pokazuje ta tablica, i na każdym
+  wierszu o inną kwotę.
+- **Celowo odwrotność wyścigu klas aktywów.** Tamta tablica jest rysowana na serii skorygowanej, bo
+  fundusz wypłaca; ta zostaje nietknięta, bo indeks nie wypłaca. Obu tablic nie można czytać
+  względem siebie.
+- **Dziewięć wierszy, a lista jest wbudowana**, nie jest to lista, którą prowadzisz sam. Chciano
+  indeksu CSI „wszystkich obligacji” i nie ma go w tym źródle: przypominający go kod to indeks
+  obligacji wydzielonych z Shanghai, którego seria miesięczna kończy się w sierpniu 2015, a
+  przejrzenie całej przestrzeni kodów indeksów nie znalazło żadnego indeksu całościowego. Miejsca
+  te przypadły najgłębszym indeksom kredytowym, na które źródło odpowiada.
+- **Początki się różnią.** Najwcześniejszy wiersz zaczyna się 2003-02, a indeks konwertowalny
+  Shenzhen dopiero 2014-08, więc na dziesięcioletniej tablicy wchodzi pięć lat później. Wiersza,
+  który jeszcze się nie zaczął, nie ma — nie stoi na 0,00%.
+- **Miesięcznie**, jeden słupek na miesiąc, a ustawienie rynku tu nie rządzi. Mniej niż dwanaście
+  miesięcy jest odrzucane.
+- **Zaczyna się od pierwszego pełnego miesiąca w zakresie.** Źródło odpowiada wyłącznie pełnymi
+  miesiącami, a słupek miesięczny *to* ten pełny miesiąc: gdy zakres zaczyna się w połowie
+  miesiąca, ten niepełny się nie liczy — wykres rusza od następnego pełnego miesiąca. Dlatego
+  „ostatnie 10 lat" rysuje 119, a nie 120 miesięcy: brakujący leży poza zakresem. Dwie daty
+  w nagłówku to rzeczywisty początek i koniec.
+- **Trzy grupy**: wszystkie dziewięć, sześć zwykłych obligacji bez zamiennych i trzy zamienne.
+
+## Obsunięcia
+
+Wiersz to **jak daleko poniżej własnego szczytu jest instrument** — nie ile zarobił, lecz ile
+kosztowało wytrzymanie tego zarobku. Te same osiem instrumentów co w wyścigu klas aktywów, tyle że
+mierzone względem siebie samych, nie względem innych.
+
+- **Krzywa jest sednem.** W całej tej aplikacji wartość rysowana jest jako długość, a długość może
+  powiedzieć tylko, jak głęboka jest woda w tej jednej chwili. Głębokość jest kształtem w czasie:
+  dołek i wyjście z niego to dwa miejsca na krzywej, a odległość między nimi w kadrze to liczba
+  miesięcy, jakie upłynęły.
+- **Te dwie liczby nie rosną razem.** W ostatnich dziesięciu latach fundusz Nasdaq spadł o 25,52%
+  i wrócił do poziomu w sześć miesięcy; fundusz CSI 500 spadł o 56,07% i potrzebował osiemdziesięciu
+  sześciu. Wydrukowana jako jedna liczba, druga wygląda na wzmocnioną wersję pierwszej — a nie jest.
+- **Jedna skala głębokości dla całej tablicy.** Skalowanie każdego wiersza według jego własnego
+  najgorszego momentu narysowałoby 0,2% funduszu rynku pieniężnego jako otchłań wielkości 56% CSI
+  500 — na tablicy, której cały sens polega na tym, że tych dwóch nie można porównywać. Dlatego ten
+  wiersz jest płaską linią przy własnej linii szczytu — i **ta płaskość jest jego komunikatem**.
+- **Z korektą, miesięcznie i od własnego pierwszego miesiąca**, z powodów podanych przez wyścig
+  klas aktywów: dystrybucje funduszu nigdy nie pojawiają się w jego cenie, a instrument, który
+  dołącza w 2019, nie jest mierzony względem szczytu, którego nie miał.
+- **Wiersze wciąż biegną.** Są uporządkowane według odległości od własnego szczytu — najbliżej
+  szczytu na górze — i zamieniają się miejscami wraz z upływem miesięcy.
+- **Złoto i fundusz towarowy były w chwili pomiaru wciąż pod wodą** — tablica zgłasza taki spadek
+  jako otwarty, bo okres skończył się, zanim został naprawiony.
+- **Albo własna lista.** Ostatnia grupa w menu to lista własna: wpisz kod, nazwę lub pinyin, aby
+  dodać jeden walor, a trzy rynki można na niej mieszać. Jedna lista dla czterech tablic: akcję
+  dodaną tu znajdziesz też na trzech pozostałych; pobiera się ją z korektą, dokładnie jak osiem
+  funduszy, więc dywidendy i podziały są w liczbie. Poniżej trzech pobieranie jest odrzucane.
+
+Nie podlega ustawieniu rynku: wszystkie osiem jest notowanych na giełdzie kontynentalnej. Mniej niż
+dwanaście miesięcy w okresie jest odrzucane.
+
+## Skuteczność
+
+Wiersz to **udział zakończonych wejść, które zarobiły** — ze wszystkich miesięcy, w których można
+było wejść i trzymać równie długo, część zakończona na plusie. Te same osiem instrumentów co w
+wyścigu klas aktywów i na tablicy obsunięć, oceniane według tego, czy trzymanie ich zadziałało, a
+nie według tego, ile dały zarobić.
+
+- **Jedno wejście to szczęście; osiemdziesiąt cztery to wskaźnik.** Każdy miesiąc okresu jest
+  wejściem i każde jest trzymane równie długo, więc trzymanie trzy lata w ciągu dziesięciu to
+  osiemdziesiąt cztery wejścia na wiersz, nie jedno. Współdzielą miesiące i to jest sedno:
+  przerzedzenie ich do trzech niezależnych zostawiłoby wskaźnik z trzema obserwacjami w środku.
+- **Wejście liczy się od miesiąca, w którym się kończy.** To, co kupione w ostatnich trzech latach
+  okresu, jeszcze się nie zakończyło, a policzenie niezakończonego wejścia jako straty wygięłoby
+  każdy wiersz w dół na końcu wyłącznie z powodu kalendarza. Tablica zaczyna się więc w pierwszym
+  miesiącu, w którym wejście mogło się zakończyć.
+- **Wiersz dołącza, gdy zakończy się sześć wejść.** Jedno wejście to 0% albo 100%, i każda z tych
+  dwóch liczb na końcu rankingu jest końcem, na który nie zapracowała.
+- **Z korektą, miesięcznie i od pierwszego własnego miesiąca każdego instrumentu**, z powodów,
+  które podaje wyścig klas aktywów: dystrybucje funduszu nigdy nie pojawiają się w jego cenie, a
+  fundusz uruchomiony w 2019 nie ma wejść z 2016, które mógłby wygrać albo przegrać.
+- **Okres utrzymania to jedyny nowy wybór na tej tablicy.** Jeden rok i pięć lat w tych samych
+  dziesięciu latach to dwa różne pytania z dwiema różnymi odpowiedziami, a osiem wierszy
+  porządkuje się między nimi na nowo.
+- **Wiersze wciąż biegną.** Są uporządkowane według wskaźnika — najczęściej na plusie na górze — i
+  zamieniają się miejscami wraz z upływem miesięcy.
+- **Albo własna lista.** Ostatnia grupa w menu to lista własna: wpisz kod, nazwę lub pinyin, aby
+  dodać jeden walor, a trzy rynki można na niej mieszać. Jedna lista dla czterech tablic: akcję
+  dodaną tu znajdziesz też na trzech pozostałych; pobiera się ją z korektą, dokładnie jak osiem
+  funduszy, więc dywidendy i podziały są w liczbie. Poniżej trzech pobieranie jest odrzucane.
+
+Zmierzone w ostatnich dziesięciu latach przy trzymaniu trzy lata: fundusz Nasdaq był na plusie przy
+wszystkich osiemdziesięciu czterech wejściach, a fundusz z Hongkongu przy czterdziestu procentach z
+nich — dwa wiersze, które wyścig klas aktywów rozdziela dziesięcioma latami całkowitego zwrotu, a
+ta tablica rozdziela tym, czy w ogóle udało się wejść.
+
+Nie zależy od ustawienia rynku: wszystkie osiem jest notowanych na giełdzie kontynentalnej. Mniej
+niż dwanaście miesięcy w okresie jest odrzucane.
+
+## Macierz stóp zwrotu
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/monthly-matrix.png)
+
+Miesięczne słupki ułożone w siatkę: tryb roku pokazuje sezonowość instrumentu przez dekadę, tryb porównania stawia kilka instrumentów obok siebie, by pokazać rotację.
+
+- Tryb roku: wybierz instrument (wyszukiwanie lub predefiniowany szeroki indeks); zakres to 1–10 lat lub wszystkie. Jedno zapytanie zwraca dekadę miesięcznych słupków.
+- Tryb porównania: 2–14 instrumentów z listy (branże poziomu 1 / tematy / szerokie indeksy / własna / akcje) obok siebie, na 6–48 miesięcy.
+- Siatka zapala się komórka po komórce w kolejności czasu; na koniec podaje najsilniejszy i najsłabszy miesiąc zakresu oraz inne statystyki.
+- Dane miesięczne obejmują dekadę za jednym razem, więc nie ma tu dziennego limitu dni — ale zbyt wiele instrumentów wykracza poza kadr.
+
+## Kalendarz zysków i strat
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/gain-calendar.png)
+
+Dowolna chińska akcja lub indeks, jego dzienny wzrost lub spadek ułożony w komórki kalendarza według miesięcy: czerwony przy wzroście, zielony przy spadku.
+
+- Szukaj po kodzie, nazwie lub pinyinie; predefiniowane to szerokie indeksy. Obsługiwane są tylko instrumenty wybranego rynku.
+- Lista ulubionych jest współdzielona z stroną akcji aplikacji — ulubiony dodany w jednym miejscu widać w obu.
+- Zakres to 1, 3, 6 lub 12 miesięcy albo dowolny; pojedynczy instrument nadal podlega limitowi około 640 dni kalendarzowych.
+- Końcowa statystyka podaje liczbę sesji wzrostowych i spadkowych.
+
+## Plan DCA
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/dca-plan.png)
+
+Kupowanie jednego instrumentu na stałą kwotę w stałych odstępach — w każdy dzień sesji, co tydzień lub co miesiąc — i animacja tego, czym stała się dyscyplina. Kilka planów może dzielić jeden obraz: po jednej linii wartości na każdy, z bieżącym zyskiem na jej końcu.
+
+- Instrumenty pochodzą z **Twojej listy**, tej samej, którą dzielą inne tablice: wpisz kod lub nazwę, aby dodać; przełącznik na chipie decyduje, czy jest na tym obrazie, a × usuwa go ze wspólnej listy (a więc i z innych tablic). Wiersz jednego dotknięcia idzie za rynkiem — szerokie i złote ETF na akcjach A, hongkongskie fundusze śledzące, w USA SPY, QQQ i GLD — a dotknięcie dodaje tę nazwę i od razu ją rysuje.
+- **Od 2 do 6 planów na jednym obrazie.** Każdy wpłaca tę samą kwotę w tym samym rytmie, kupując od własnego pierwszego dnia sesyjnego. Rysowane są tylko linie wartości: sześć wypełnień jeden na drugim to błoto, a przy tej samej kwocie i rytmie sześć linii wpłat pada dokładnie jedna na drugą — więc linię wpłat rysuje się raz, dla planu, który wpłacił najwięcej, bo narysowanie najmniejszej wpłaty upiększyłoby pozostałe. Oś dat to suma ich dni: instrument notowany później po prostu zaczyna się później i wcześniej go nie ma. Sześć to pułap — powyżej pobieranie odmawia, zamiast po cichu narysować kilka z nich — a instrument z innego rynku zostaje pominięty. Przy kilku planach wielka liczba pośrodku staje się stopą zwrotu w procentach planu **prowadzącego**, a nie jego kwotą: późniejsza notacja wpłaciła mniej, a zarobić mniej to nie to samo co być gorszym planem.
+- **Liczba jedzie na linii.** Etykieta na końcu każdego planu nazywa go i podaje kwotę, o jaką jest w tym momencie do przodu; porusza się z animacją — pociągnij pasek, a pójdzie z linią. Przy jednym planie wielka liczba pośrodku to nadal stopa zwrotu w procentach, a etykieta i tak jest.
+- Kwotę i częstotliwość ustawiasz sam; okres to trzy, pięć lub dziesięć lat, albo tak daleko wstecz, jak sięgają dane (około trzynastu lat).
+- Stopa zwrotu liczona jest na cenach skorygowanych wstecz, bez opłat. Wynik opisuje szereg cen, a nie rachunek, który ktokolwiek mógłby zrealizować.
+- Oprócz 3, 5 i 10 lat oraz najdłuższego zakresu można wybrać **Własny**: podaj datę początkową i końcową, a następnie pobierz dane. Dostępnych jest około 35 lat wstecz — źródło zwraca około 640 dni kalendarzowych na jedno żądanie, a przejście wykonuje ich najwyżej dwadzieścia.
+- **Dwa tryby animacji.** *Cały zakres naraz* rozkłada cały okres za jednym razem; *przesuwne okno* utrzymuje okno o stałej liczbie dni sesyjnych i przesuwa je od początku do końca okresu — tylko tak długa seria dzienna zachowuje czytelne wahania. Okno liczy się tylko przy przewijaniu, a oba tryby czytają **te same dane** — przełączenie nic nie pobiera ponownie. **Oś pionowa nie jest przeliczana dla okna**: odstęp między dwiema liniami *jest* wynikiem planu, a przeliczenie rozciągnęłoby go razem z oknem.
+- **Przesuwne okno otwiera się na końcu.** Wraz z początkiem końcowego odcinka okno rozszerza się wstecz aż do pierwszego dnia zakresu, więc klatka, na której animacja się zatrzymuje, pokazuje cały zakres, a nie jego ostatnie kilkadziesiąt dni.
+- **Pas po prawej stronie można oddać, jeśli zależy ci na szerokości.** Domyślnie jest wyłączony: platforma rysuje tam swój awatar oraz przyciski „lubię to” i komentarzy w pionowym wideo, a liczba pod nimi jest na telefonie zasłonięta, choć tutaj widać ją bez problemu. Włączony: kadr wypełniający cały zakres rysuje do własnej krawędzi kadru od pierwszej klatki; przesuwne okno zachowuje odstęp, dopóki jest oknem, i wraz z oknem rozwiera się na pełną szerokość — więc klatka, na której zatrzymuje się film, to cały zakres od krawędzi do krawędzi.
+
+## Zwrot z pozycji
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/position.png)
+
+Jeden zakup, trzymany długo — milion w tym samym instrumencie od 2015 roku — animowany, by pokazać, co lata zrobiły z wartością i stopą zwrotu. Kilka pozycji może dzielić jeden obraz: po jednej linii na każdą, z bieżącym zyskiem na jej końcu.
+
+- Pozycje pochodzą z **Twojej listy**, tej samej, którą dzielą inne tablice: wpisz kod lub nazwę, aby dodać pozycję; przełącznik na chipie decyduje, czy jest na tym obrazie, a × usuwa ją ze wspólnej listy (a więc i z innych tablic). Wiersz jednego dotknięcia idzie za rynkiem — 中国平安 i 贵州茅台 dla kontynentu, 腾讯, 汇丰 i 盈富基金 dla Hongkongu, Apple, Berkshire i SPY dla Nowego Jorku — a dotknięcie dodaje tę nazwę i od razu ją rysuje.
+- **Od 2 do 6 pozycji na jednym obrazie.** Każda jest kupowana raz, za tę samą kwotę, w swoim pierwszym dniu sesyjnym, więc linie są wprost porównywalne, a odległość między dwiema z nich w dowolnej dacie odpowiada na pytanie „gdzie było lepiej to położyć”. Oś dat to suma ich dni: instrument notowany później po prostu zaczyna się później i przed tym go nie ma, zamiast być rysowany płasko po koszcie. Sześć to pułap — powyżej pobieranie odmawia, zamiast po cichu narysować kilka z nich — a pozycja z innego rynku zostaje pominięta, bo kwoty tutaj są w walucie obowiązującego rynku.
+- **Liczba jedzie na linii.** Etykieta na końcu każdej pozycji podaje jej nazwę i kwotę zysku w tej chwili, i porusza się razem z animacją — przeciągnij suwak, a pojedzie z linią. Przy jednej pozycji duża liczba na środku to nadal stopa zwrotu w procentach; przy kilku staje się kwotą zysku **lidera**, z jego nazwą pod spodem, a karty na koniec są po jednej na pozycję, zamiast czterech liczb o jednej.
+- Kapitał początkowy i okres trzymania należą do ciebie; okres to trzy, pięć lub dziesięć lat — albo tak daleko, jak sięgają dane (około trzynastu lat).
+- Zwrot liczony jest na cenach skorygowanych wstecz — dywidendy reinwestowane, bez opłat. Korekta wstecz kotwi się w pierwszym dniu notowań i narasta o dywidendy w przód, więc wczesne lata szczodrego płatnika nigdy nie stają się niedodatnie, jak to możliwe przy korekcie w przód.
+- Ten sam zakres **Własny** działa dla pozycji: podaj dwie daty, a następnie pobierz dane. Jeśli instrument zadebiutował później niż podana data, pozycja zaczyna się w jego pierwszym dniu notowań.
+- **Dwa tryby animacji.** *Cały zakres naraz* rozkłada cały okres za jednym razem, więc kształt krzywej na ekranie to jej kształt w czasie. *Przesuwne okno* utrzymuje okno o stałej liczbie dni sesyjnych i przesuwa je od początku do końca okresu — tylko tak długa seria dzienna zachowuje czytelne wahania: rozłożona na dwanaście lat, trzymiesięczny spadek to dwa piksele. Okno liczy się tylko przy przewijaniu, a oba tryby czytają **te same dane** — przełączenie nic nie pobiera ponownie.
+- **Przesuwne okno otwiera się na końcu.** Wraz z początkiem końcowego odcinka okno rozszerza się wstecz aż do pierwszego dnia zakresu, więc klatka, na której animacja się zatrzymuje, pokazuje cały zakres, a nie jego ostatnie kilkadziesiąt dni.
+- **Pas po prawej stronie można oddać, jeśli zależy ci na szerokości.** Domyślnie jest wyłączony: platforma rysuje tam swój awatar oraz przyciski „lubię to” i komentarzy w pionowym wideo, a liczba pod nimi jest na telefonie zasłonięta, choć tutaj widać ją bez problemu. Włączony: kadr wypełniający cały zakres rysuje do własnej krawędzi kadru od pierwszej klatki; przesuwne okno zachowuje odstęp, dopóki jest oknem, i wraz z oknem rozwiera się na pełną szerokość — więc klatka, na której zatrzymuje się film, to cały zakres od krawędzi do krawędzi.
+
+## Film
+
+Kadr jest zawsze 9:16. Wszystko inne ustalasz sam.
+
+- Czas trwania zmienia tempo, a nie skraca animacji: wstęp, wzrost słupków i końcowe statystyki są rozłożone na wybraną długość.
+- Marginesy są zapisane względem kadru 1080×1920 i skalowane do rozdzielczości eksportu, więc raz dobrany układ obowiązuje w każdym rozmiarze. Lewy margines decyduje też, gdzie trafiają opisy osi: za mały, i liczby wyjdą poza kadr.
+- Linie bezpiecznego obszaru obrysowują to, co aplikacja na telefonie zakrywa własnym interfejsem. Rysują się w podglądzie i nigdy w pliku.
+- Tytuł może mieć więcej niż jedną linię: w polu tytułu naciśnij Enter, aby złamać go tam, gdzie chcesz. Jeśli nie mieści się w jednej linii, sam przechodzi do drugiej — najwyżej dwóch; dopiero gdy i dwie nie wystarczą, maleje stopień pisma. Druga linia przesuwa wszystko poniżej o jeden wiersz, więc wykres jest o tyle niższy.
+- **Nazwa i liczba na końcu linii zatrzymują się przed interfejsem platformy.** Aplikacja na telefon rysuje swój awatar oraz przyciski „lubię to” i komentarzy po prawej stronie pionowego wideo, więc obszar rysowania kończy się przed prawym brzegiem kadru, a bieżący punkt krzywej — wraz z nazwą i liczbą — zatrzymuje się na lewo od tego pasa. Wykres jest węższy od kadru i dlatego.
+
+- Wszystko aż do ostatniego kroku jest darmowe: pobieranie danych, odtwarzanie animacji, zapisanie okładki. **Eksport** to jedyne miejsce, które prosi o miesięczną subskrypcję; po kliknięciu wyjaśnia, co ona kupuje i ile kosztuje. Odnawia się, dopóki nie anulujesz jej w Microsoft Store.
+
+## Gdzie trafiają filmy
+
+Eksporty zapisują się do folderu, który wybierasz w okienku. Dopóki żaden nie został wybrany, pierwszy eksport zapyta i potem zapamięta; ustawienia pozwalają to zmienić albo zapomnieć.
+
+## Obraz w tle
+
+Na stronie ustawień można umieścić obraz za oknem, przyciemniony. Karty i panele pozostają nieprzezroczyste, a okienko nawigacji przepuszcza tylko trochę — obraz widać głównie wokół nich. Podgląd wideo ma własne nieprzezroczyste tło i pozostaje bez zmian.
+
+- Wybierz obraz z komputera lub użyj wprost jednej z tapet i obrazów ekranu blokady dołączonych do systemu Windows.
+- Wybrany obraz jest kopiowany do folderu aplikacji — przeniesienie lub usunięcie oryginału nie wpływa na tło.
+- Suwak intensywności maski określa, jak bardzo obraz zostaje przygaszony, w zakresie od 30% do 95%.
+- Gdy włączony jest wysoki kontrast, obraz w tle nie jest pokazywany.
+## Tło animacji
+
+Na stronie ustawień możesz zmienić to, na czym rysowana jest animacja: wbudowany gradient, dwa własne kolory albo obraz. Dotyczy to podglądu, eksportowanego wideo i obrazu okładki — wszystkie trzy rysuje ten sam renderer, więc nie ma „ładnie w podglądzie, inaczej w pliku”.
+
+- Przy kolorach podajesz ton górny i dolny, a klatka przechodzi między nimi. Lepiej ciemne: każdy odcień tekstu jest jasny, a jasne tło utrudnia odczyt liczb.
+
+- Suwak krycia określa, ile z dwóch kolorów zostanie użyte: przy 100% klatka to po prostu wybrana para, a niżej spod spodu prześwituje własny ciemny gradient strony. To właśnie utrzymuje czytelność jasnej pary.
+
+- Wybór obrazu działa tak samo jak dla tła okna: obraz z komputera albo tapeta dołączona do Windows. Wybrany jest kopiowany do folderu aplikacji.
+
+- Obraz wypełnia klatkę, a nadmiar jest przycinany, więc proporcje nigdy się nie rozciągają.
+
+- Suwak przyciemnienia decyduje, jak mocno obraz jest cofany do własnego tła strony: od 20% do 95%.
+
+- **Każda klatka niesie też nazwę na swoim tle: znak wodny.** Jest domyślnie włączony, głosi „周期留白”, dopóki go nie zmienisz, a treść jest twoja. Powtarza się ukośnie po całym obrazie, rysowany **pod** danymi, więc niczego nie zasłania; podgląd, eksportowane wideo i okładka niosą go tak samo. Pusty wraca do nazwy domyślnej — żeby nie było go wcale, trzeba go wyłączyć. Przełącznik jest domyślnie włączony, bo wideo trafia w miejsce, które nic nie mówi o tym, gdzie powstało.
+
+- Zdjęcie znaku wodnego to jedna z dwóch rzeczy, które kupuje subskrypcja. Dopóki jej nie ma, przełącznik zostaje włączony i nie da się go ruszyć — i dokładnie to będzie nosić każda klatka, więc podgląd i plik nigdy się nie różnią.
+
+
+- **Wygląd znaku też jest twój.** Font to dowolny font zainstalowany na tym komputerze — każda pozycja na liście jest napisana fontem, który wymienia —, kolor to ten, który da próbnik, a moc to, ile tego koloru zostanie użyte: domyślnie 10%, najwyżej 40%, i nawet przy najwyższym znak jest rysowany pod danymi. Wszystkie trzy dotyczą podglądu, eksportowanego wideo i okładki tak samo.
+
+- **Dopóki nie ma subskrypcji, ten suwak zostaje na 40%.** Przyciszenie znaku idzie w parze z jego zdjęciem: aplikacja bez subskrypcji rysuje każdą klatkę z pełną mocą, a suwaka nie da się z tego miejsca ruszyć. Powyższe 10% to wartość, od której zaczyna się, gdy subskrypcja już jest.
+- Domyślna treść nie podąża za językiem interfejsu: znak wodny to podpis, a podpis, który zmieniałby się wraz z językiem, byłby na każdym komputerze innym podpisem.
+
+## Dane i to, czego nie powiedzą
+
+Notowania pochodzą z publicznych punktów końcowych Tencent Finance, a kadr zawsze podaje źródło. Te filmy opisują to, co już zostało zawarte. Są wyłącznie informacyjne i nie stanowią porady inwestycyjnej.
+
+- Obroty są przeliczane na setki milionów juanów, a wolumen przechodzi na większą jednostkę, gdy liczby tego wymagają, żeby oś dała się czytać.
+- Obroty przelicza się na setki milionów — juanów na kontynencie i w Hongkongu, dolarów w USA. Każdy rynek zachowuje swoją walutę.
+- Zakres dłuższy niż to, co jedno żądanie może zwrócić, jest odrzucany zamiast po cichu ucięty: około 900 dni kalendarzowych na interwale dziennym, około piętnastu lat na stronie świec, która cofa się strona po stronie, i cała historia na miesięcznym. Ciche ucięcie to najgorszy wynik — znika wtedy **początek**, a wykres bez pierwszych lat to po prostu krótszy wykres, który wygląda zupełnie normalnie.
+
+## Aktualizowanie
+
+Gdy w Microsoft Store jest nowsza wersja, w panelu nawigacji obok Ustawień pojawia się przycisk **Aktualizuj**; jedno kliknięcie ją instaluje.
+
+- Pojawia się tylko wtedy, gdy w Store naprawdę jest nowsza wersja. Kompilacja deweloperska albo zainstalowana z boku nigdy go nie zobaczy i tak ma być.
+- Aplikacja zamyka się na czas instalacji i uruchamia ponownie w nowej wersji, a przycisk znika. Jeśli trwa eksport, najpierw zapyta.
+- Jeśli instalacja się nie uda, poda powód — tylko przez Wi-Fi, za słaba bateria — a aktualizację można też zainstalować z Microsoft Store.
+
+## Coś nie działa?
+
+Napisz na gaqo@outlook.com, co robiłeś i czego się zamiast tego spodziewałeś. Numer wersji jest na stronie ustawień.

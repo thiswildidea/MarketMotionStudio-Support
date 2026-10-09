@@ -27,6 +27,16 @@ a local crash log.
 The application ships with help in fourteen languages, reachable from the Help
 page inside it. That is the fastest answer for most questions.
 
+## The manual
+
+The manual is published here as well as inside the application — one document
+and its pictures per language, under [`help/`](help/). Pressing Help inside the
+application reads the copy here first, so a correction made to this site reaches
+the application the next time Help is opened rather than on the next release. If
+it has no network, or this site is unreachable, the application shows the copy
+shipped inside it instead: the manual opens either way, and the two are the same
+files.
+
 ## Privacy
 
 The application collects nothing — no analytics, no telemetry, no crash
@@ -58,6 +68,10 @@ three details are the difference between a guess and a fix.
 请**不要**附上密码或应用存储文件夹里的文件。诊断问题不需要这些——本应用没有账号体系、不存密码，存储文件夹里只有你的设置和一份本地崩溃日志。
 
 应用内置了十四种语言的帮助文档，从应用里的"帮助"页面即可打开。大多数问题在那里能最快找到答案。
+
+## 手册
+
+手册除了随应用发布，也在这里发布一份——每种语言一份文档加它的配图，都在 [`help/`](help/) 下面。应用里打开"帮助"时先读这里的这份，所以在这里改一句话，下次打开帮助就能看到，不必等下一个版本；没有网络或这个站点连不上时，应用改用它自带的副本。两种情况下手册都能打开，而且是同一批文件。
 
 ## 隐私
 
