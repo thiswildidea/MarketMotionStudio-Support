@@ -10,7 +10,8 @@ returns, a buy-and-hold position replayed day by day, a recurring investment
 plan, a market-cap race — for the China A-share, Hong Kong and US markets,
 with a fourth market of its own for cryptocurrency, which is offered outside
 mainland China (both of its price sources sit abroad) — exported as H.264 MP4
-ready to post.
+ready to post to Douyin, Kuaishou, Xiaohongshu, WeChat Channels, TikTok, YouTube
+and Instagram.
 
 ## Getting help
 
@@ -57,7 +58,7 @@ three details are the difference between a guess and a fix.
 
 # Market Motion Studio — 支持
 
-一款把行情指标做成竖屏（9:16）动画视频的 Windows 桌面应用：全市场成交额、行业板块竞速、月度收益、逐日盯市的持仓回放、定投计划、市值竞速——覆盖A股、港股、美股，另有加密货币这第四个市场（只在中国大陆以外提供，它的两个行情源都在境外）——导出为可直接发布的 H.264 MP4。
+一款把行情指标做成竖屏（9:16）动画视频的 Windows 桌面应用：全市场成交额、行业板块竞速、月度收益、逐日盯市的持仓回放、定投计划、市值竞速——覆盖A股、港股、美股，另有加密货币这第四个市场（只在中国大陆以外提供，它的两个行情源都在境外）——导出为可直接发布到抖音、快手、小红书、视频号以及 TikTok、YouTube、Instagram 的 H.264 MP4。
 
 ## 获取帮助
 
