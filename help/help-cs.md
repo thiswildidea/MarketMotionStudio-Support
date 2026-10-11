@@ -6,9 +6,11 @@ Tato aplikace mění ukazatele trhu akcií A na svislá videa pro telefon. Vyber
 
 V nastavení se volí, z kterého trhu aplikace bere kurzy; výchozí jsou A-akcie. Změna se projeví po restartu aplikace.
 
-- **A-akcie**: všech osm stránek je k dispozici.
-- **Hongkong**: matice výnosů a kalendář fungují; závod sektorů běží na čtyřech subindexech Hang Seng; **údaj za celý trh neexistuje, proto je tato stránka skrytá**.
-- **USA**: matice výnosů a kalendář fungují; závod sektorů běží na deseti sektorových ETF SPDR; stránka objemu má jen denní režim, protože minutový endpoint data pro USA nevrací; **částky jsou v dolarech a stránka obratu celého trhu je skrytá**.
+- **Volba se uloží, ale nepoužije.** Na obrazovce se nic nezmění, dokud se aplikace nerestartuje, takže se příslušný řádek zobrazí **nahoře na stránce nastavení**, nad kartami, a při posouvání tam zůstává, s tlačítkem, které aplikaci restartuje za vás.
+- **A-akcie**: všechny akciové stránky jsou k dispozici.K čemu je: film obratu celého trhu — jediný trh, jehož zdroj ho uvádí — závod sektorů na sektorech Shenwan první úrovně, závod tržní kapitalizace patnácti největších dne a prémie AH, tedy dvě kotace téže společnosti proti sobě.
+- **Hongkong**: matice výnosů a kalendář fungují; závod sektorů běží na čtyřech subindexech Hang Seng; **údaj za celý trh neexistuje, proto je tato stránka skrytá**.K čemu je: matice výnosů a kalendář čtené na hongkongských indexech a titulech, závod sektorů na čtyřech subindexech Hang Seng a trackery Hang Seng jako předvolby.
+- **USA**: matice výnosů a kalendář fungují; závod sektorů běží na deseti sektorových ETF SPDR; stránka objemu má jen denní režim, protože minutový endpoint data pro USA nevrací; **částky jsou v dolarech a stránka obratu celého trhu je skrytá**.K čemu je: matice výnosů a kalendář čtené na amerických indexech a titulech, závod sektorů na deseti sektorových ETF SPDR a široké předvolby — SPY, QQQ, DIA.
+- **Kryptoměny**: nabízeno jen tam, kde lze získat cenu — oba jeho zdroje jsou z pevniny nedosažitelné. Jeho volba ponechá v navigaci šest krypto stránek a odebere všechny akciové, protože ty čtou endpoint, který nekotuje žádnou minci. Ceny jsou v amerických dolarech a mince se obchoduje každý den v roce, takže žádný den nechybí.Mimo pevninskou Čínu jsou kryptoměny zdaleka nejžádanějším tématem pro video v telefonu a mají šest vlastních stránek: svíce jedné mince, plán pravidelného nákupu, výnos pozice, kalendář a dvě stránky o tržní kapitalizaci.
 
 
 
@@ -416,6 +418,80 @@ Jeden nákup, držený dlouho — milion do stejného nástroje od roku 2015 —
 - **Dva způsoby animace.** *Celé období* rozloží celý rozsah najednou, takže tvar křivky na obrazovce je její tvar v čase. *Posuvné okno* drží okno s pevným počtem obchodních dnů a posouvá je od začátku do konce rozsahu — jen tak zůstanou výkyvy dlouhé denní řady čitelné, protože rozložená na dvanáct let jsou tři měsíce poklesu dva pixely. Okno má význam jen při posouvání a oba způsoby čtou **stejné kurzy** — přepnutí nic nenačítá.
 - **Posuvné okno se na konci otevře.** Se začátkem závěrečného úseku se okno rozšíří zpět až k prvnímu dni rozsahu, takže snímek, na kterém animace skončí, je celý rozsah, nikoli jeho poslední několik desítek dnů.
 - **Pás na pravé straně lze uvolnit, chcete-li šířku.** Ve výchozím nastavení je vypnutý: platforma kreslí svůj avatar a tlačítka „to se mi líbí“ a komentářů na té straně svislého videa a číslo pod nimi je na telefonu skryté, přestože je tu zcela čitelné. Zapnutý: záběr, který vyplňuje celý rozsah, kreslí od první snímku až k vlastnímu okraji záběru; posuvné okno drží odstup, dokud je oknem, a spolu s oknem se rozevře na plnou šířku — snímek, na kterém video skončí, je tedy celý rozsah od okraje k okraji.
+
+## Krypto svíčky
+
+![Stránka jako celek: náhled vlevo, přehrávací lišta dole, nastavení vpravo.](media/crypto-candle.png)
+
+Denní svíčky jedné mince v amerických dolarech z veřejného zdroje. Týdenní a měsíční jsou složeny ze stejných dnů.
+
+- Dvanáct nabízených mincí jsou ty, k nimž oba zdroje mají roky denní historie. Pole výše zužuje řádek na zadaný text: odpovídá názvu, který píše tento jazyk rozhraní, nebo kódu — bit i BTC najdou Bitcoin. Zvolená mince na řádku zůstává bez ohledu na zadaný text.
+- **Interval** — den, týden nebo měsíc — mění to, která řada se kreslí, takže jeho změna znovu načítá data. **Styl** a **Průběh** ne; jen překreslují to, co už je tu.
+- **1, 5 a 15 minut** se ptá na den, ne na rozsah: zvolením jedné z nich se seznam rozsahů vymění za výběr data. Zrnitost jedné minuty sahá osm dní zpět, zbylé dvě šedesát, a dál ne — tolik zdroj drží, není to limit, který by si určila tato aplikace. Coin se obchoduje čtyřiadvacet hodin denně, takže jeden den je už přes tisíc svíček.
+- Mince se obchoduje každý den v roce: rozsah nemá svátky, které by musel přeskočit, ani chybějící dny, a mince nevyplácí dividendu ani se neštěpí — závěr *je* výnos a na těchto šesti stránkách se žádná úprava neprovádí.
+- Když je dosažitelný jen záložní zdroj, má jeden denní kurz místo čtyř, a svíčky i sloupce se pak kreslí jako čára: tělo se dvěma knoty udělané z jediného závěru je tvar, který mince nikdy neměla. Stránka to říká pod volbou stylu, když je to tento případ.
+- Najednou lze kreslit až šest mincí; sedmý stisk se nepřijímá, protože sedmá křivka by vzala barvu, kterou už má šestá. Při porovnání se kreslí jako kumulativní změna, protože mince nemají ceny ve stejném řádu.
+- **Těchto šest stránek se objeví jen tam, kde nějaký zdroj odpoví.** Oba zdroje jsou mimo dosah pevninské Číny, takže počítač tam je v menu prostě nedostane: šest položek nabízejících data, která nemohou načíst, by bylo šest položek, které selžou. Mimo pevninskou Čínu jsou kryptoměny zdaleka nejžádanějším tématem pro video na telefonu a právě pro ně je těchto šest stránek: mince se obchoduje čtyřiadvacet hodin denně, každý den v roce, bez svátku, který by bylo třeba přeskočit.
+
+## Plán krypto DCA
+
+![Stránka jako celek: náhled vlevo, přehrávací lišta dole, nastavení vpravo.](media/crypto-dca.png)
+
+Nakupovat jednu minci v pevném rytmu — řekněme týdně nebo měsíčně — a za kolik je ten plán dnes.
+
+- **Frekvence** a **Částka** říkají jak často a kolik, v amerických dolarech. Plán nakupuje první den každého období, které rozsah pokrývá.
+- Kreslí se vložené peníze proti hodnotě pozice, den po dni, s vyznačenými nákupy: pokles, do kterého jste nakupovali, se čte jinak než ten, do kterého jste nenakupovali.
+- Porovnat lze až šest plánů. Při porovnání se kreslí jako kumulativní změna místo peněz, aby mince za 60 000 dolarů a mince za půl dolaru šly číst proti sobě.
+- Mince zařazená až po začátku rozsahu začíná svým vlastním prvním dnem, a mince bez kurzu v celém rozsahu je uvedena na stavovém řádku místo aby byla nakreslena jako rovná čára.
+- Dny jsou tu kalendářní dny. Mince se obchoduje každý z nich: rok týdenních nákupů je asi 52 nákupů, rok měsíčních 12, a ani jedno číslo není přibližné.
+
+## Výnos krypto portfolia
+
+![Stránka jako celek: náhled vlevo, přehrávací lišta dole, nastavení vpravo.](media/crypto-position.png)
+
+Částka vložená do jedné mince v jednom dni a kolik má dnes hodnotu.
+
+- **Kapitál** je částka v amerických dolarech; rozsah říká den vstupu a den, kdy skončit. Stránka nakupuje za první závěr v rozsahu a drží do posledního.
+- Kreslí se hodnota pozice den po dni proti vloženým penězům: čára je nad svým startem, dokud je pozice v plusu, a pod ním, když není.
+- Vedle sebe lze držet až šest mincí; sedmý stisk se nepřijímá. Při porovnání se každá kreslí jako kumulativní změna místo hodnoty, aby dvě mince koupené za velmi různé ceny šly číst společně.
+- Dny jsou tu kalendářní dny a mince se obchoduje každý z nich: rok držení je asi 365 dnů, ne 243, které by dala burza.
+- Když je dosažitelný jen záložní zdroj, rozsah, který dokáže zaplnit, je asi rok. Stránka pak řekne, kde rozsah opravdu začíná, místo aby potichu začínal později než zadané datum.
+
+## Kalendář pohybů krypto
+
+![Stránka jako celek: náhled vlevo, přehrávací lišta dole, nastavení vpravo.](media/crypto-calendar.png)
+
+Jeden čtvereček za den, obarvený podle změny toho dne.
+
+- **Plná mřížka nejsou chybějící data.** Kalendář akcií je převážně samá díra — víkendy, svátky, pozastavení — a čte se tak, jak trh vypadá. Mince se obchoduje každý den v roce, takže každý čtvereček je vyplněný: obraz je hustší, ne delší, a co vypadá jako chybějící svátek, je trh, který nikdy nezavírá.
+- **Rozsah** jsou tři, šest nebo dvanáct měsíců, nebo vlastní období. Vlastní období se zkrátí na to, co zdroj má, a stránka řekne, kde rozsah opravdu začíná, místo aby začal později než zadané datum.
+- První čtvereček je vždy 0 %: uvnitř rozsahu není žádný předchozí závěr, a sahat pro něj ven by znamenalo, že první políčko závisí na dni, který kalendář neukazuje.
+- Barva je změna, nikoli objem obchodů. Objem mince je počet mincí a nic v této mřížce se podle něj neškáluje — kalendář je o tom, kterým směrem se den vydal a jak daleko.
+- Dny jsou tu kalendářní dny. Rok na této stránce je asi 365 čtverečků, ne 243, které by dala burza, a ani jedno číslo není přibližné.
+
+## Historie kapitalizace krypto
+
+![Stránka jako celek: náhled vlevo, přehrávací lišta dole, nastavení vpravo.](media/crypto-caphistory.png)
+
+Obíhající kapitalizace jedné mince v čase, pod ní cena za stejné dny.
+
+- **Tam, kde se obě čáry rozcházejí, vidíte emisi a pálení.** Cena je, kolik stojí jedna mince; kapitalizace je ta cena krát počet existujících mincí. Čára kapitalizace stoupající, zatímco čára ceny klesá, je rostoucí nabídka, ne špatné číslo.
+- **To je měřené, ne dopočítané.** Vynásobit dnešní nabídku starou cenou je levný způsob, jak tuto stránku nakreslit, a dává to dvě čáry, které jsou tou samou čarou: kapitalizace by neřekla nic, co cena neříká už teď. Co se tu kreslí, pochází z veřejného API CoinMetrics, které nese denní obíhající kapitalizaci: Bitcoin sahá do roku 2010, ostatní mince tak daleko, jak je zdroj drží.
+- Kapitalizace zde znamená tu *obíhající* — mince již vydané a v oběhu, nikoli plně zředěný počet, který počítá všechny mince, které kdy budou existovat.
+- Odhadovaná řada, kterou má každá mince, začíná v červnu 2019. Mince bez přesné řady začíná tam, a stránka řekne, kde rozsah opravdu začíná, místo aby potichu začínal později.
+- **Rozsah** je dvanáct, dvacet čtyři, šedesát nebo sto dvacet měsíců, nebo vlastní období. Historie mince může být kratší než požadovaný rozsah — to je spodní hranice zdroje, ne selhané načtení.
+
+## Závod kapitalizací krypto
+
+![Stránka jako celek: náhled vlevo, přehrávací lišta dole, nastavení vpravo.](media/crypto-marketcap.png)
+
+Patnáct mincí s největší kapitalizací dnes a jak se toto pořadí den po dni měnilo.
+
+- **O startovním poli se ptá, nezapisuje se.** Při načtení stránka vezme patnáct největších podle tržní hodnoty ze živého žebříčku CoinGecko; mince, která do této velikosti vyrostla loni, je tedy v tabulce, aniž by někdo upravoval seznam. Proto tu také není výběr mince: pole je odpověď a ptá se na období.
+- Denní hodnoty pocházejí z CoinMetrics, jeden požadavek pro celou tabulku. Je to odhadovaná řada tohoto zdroje, která začíná v červnu 2019 stejně pro všechny, takže rozsah se tam zkracuje, nikoli odmítá: tabulka, v níž by dvě mince měly osm let historie a třináct žádnou, by se četla jako mince, které se objevily odnikud.
+- **Stablecoiny zůstávají.** Měřeno 2026-10-11: v prvních třiceti jich bylo šest a tether byl třetí největší věcí na tomto trhu. Tabulka, která by je skryla, by řadila něco jiného než velikost. Co dělají s obrazem, je poctivé: jejich čára je rovná, protože dolar má hodnotu dolaru, takže tabulka na první pohled ukáže, které z největších věcí se tu opravdu hýbou.
+- Mince, kterou zdroj hodnot nemá, je vynechána, nikoli nakreslena ploše na nule: plochá čára na spodku závodu hodnot se čte jako mince, která skončila na ničem. Tabulka proto může mít méně než patnáct a stavový řádek řekne, kolik jich přišlo.
+- **Rozsah** je dvanáct, dvacet čtyři nebo šedesát měsíců, nebo vlastní období, zkrácené na odhadovanou řadu stejným způsobem.
 
 ## Video
 

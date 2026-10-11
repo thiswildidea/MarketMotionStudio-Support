@@ -6,9 +6,11 @@ Esta aplicación convierte indicadores del mercado de acciones A en vídeos vert
 
 En Ajustes se elige de qué mercado toma sus cotizaciones la aplicación; las acciones A por defecto. El cambio surte efecto tras reiniciar la aplicación.
 
-- **Acciones A**: las ocho páginas están disponibles.
-- **Hong Kong**: la matriz de rentabilidad y el calendario funcionan; la carrera de sectores usa los cuatro subíndices Hang Seng; **no hay cifra para todo el mercado, así que esa página se oculta**.
-- **Estados Unidos**: la matriz de rentabilidad y el calendario funcionan; la carrera de sectores usa diez ETF sectoriales SPDR; la página de volumen conserva solo el modo diario, porque el endpoint de minutos no sirve datos estadounidenses; **los importes están en dólares y la página de volumen del mercado se oculta**.
+- **La elección se guarda, no se aplica.** En pantalla no cambia nada hasta reiniciar la aplicación, así que el aviso correspondiente aparece **arriba del todo en la página de ajustes**, sobre las tarjetas y fijo ahí mientras se desplaza, con un botón que reinicia la aplicación por usted.
+- **Acciones A**: todas las páginas de acciones están disponibles.Para qué sirve: la película del volumen de todo el mercado — el único mercado cuya fuente lo publica — la carrera de sectores sobre los sectores Shenwan de primer nivel, la carrera de capitalización sobre las quince mayores de hoy y la prima AH, las dos cotizaciones de una misma empresa enfrentadas.
+- **Hong Kong**: la matriz de rentabilidad y el calendario funcionan; la carrera de sectores usa los cuatro subíndices Hang Seng; **no hay cifra para todo el mercado, así que esa página se oculta**.Para qué sirve: la matriz de rentabilidad y el calendario leídos sobre índices y valores de Hong Kong, la carrera de sectores sobre los cuatro subíndices Hang Seng y los trackers Hang Seng como ajustes predefinidos.
+- **Estados Unidos**: la matriz de rentabilidad y el calendario funcionan; la carrera de sectores usa diez ETF sectoriales SPDR; la página de volumen conserva solo el modo diario, porque el endpoint de minutos no sirve datos estadounidenses; **los importes están en dólares y la página de volumen del mercado se oculta**.Para qué sirve: la matriz de rentabilidad y el calendario leídos sobre índices y valores estadounidenses, la carrera de sectores sobre diez ETF sectoriales SPDR y los grandes ajustes predefinidos — SPY, QQQ, DIA.
+- **Criptomonedas**: solo aparece donde se puede obtener un precio — sus dos fuentes están fuera del alcance del continente. Al elegirlo, las seis páginas cripto se quedan en la navegación y todas las páginas de acciones desaparecen, porque estas leen un endpoint que no cotiza ninguna moneda. Los precios están en dólares estadounidenses y una moneda cotiza todos los días del año, así que no falta ningún día.Fuera de China continental, las criptomonedas son con diferencia el tema más buscado para un vídeo en el móvil, y traen seis páginas propias: las velas de una moneda, un plan de compra periódica, la rentabilidad de una posición, el calendario y dos páginas de capitalización.
 
 
 
@@ -441,6 +443,80 @@ Una compra, mantenida —un millón del mismo valor desde 2015—, animada para 
 - **Dos modos de avance.** *Crecer por todo el periodo* despliega todo el intervalo de una vez, así que la forma de la curva en pantalla es su forma en el tiempo. *Desplazar una ventana* mantiene una ventana de un número fijo de días de cotización y la recorre desde el inicio hasta el fin del intervalo: es la única forma de que una serie diaria larga conserve legibles sus oscilaciones, porque repartida en doce años una caída de tres meses son dos píxeles. La ventana solo cuenta al desplazar, y ambos modos leen **los mismos datos**: cambiar no vuelve a descargar.
 - **Una ventana deslizante se abre al final.** Al empezar el tramo de cierre la ventana se ensancha hacia atrás hasta el primer día del rango, así que el fotograma en el que se detiene la animación es el rango completo y no sus últimas decenas de días.
 - **La banda del lado derecho puede cederse, si quieres el ancho.** Viene desactivada: la plataforma dibuja su avatar y sus botones de «me gusta» y comentarios en ese lado de un vídeo vertical, y una cifra debajo queda oculta en el teléfono aunque aquí se lea perfectamente. Activada, un encuadre que llena toda la serie dibuja hasta el propio borde del encuadre desde su primera imagen; una ventana deslizante sigue guardando distancia mientras es una ventana y se abre al ancho completo junto con la ventana — así que la imagen en la que se detiene el vídeo es la serie completa, de borde a borde.
+
+## Velas cripto
+
+![La página completa: vista previa a la izquierda, barra de reproducción abajo, ajustes a la derecha.](media/crypto-candle.png)
+
+Las velas diarias de una moneda, en dólares estadounidenses, de una fuente pública. Las semanales y mensuales se agrupan a partir de esos mismos días.
+
+- Las doce monedas ofrecidas son las que ambas fuentes tienen con años de historial diario. El cuadro de arriba estrecha la fila a lo que se escribe: coincide con el nombre que escribe este idioma de interfaz o con el código — bit y BTC encuentran Bitcoin. Una moneda ya elegida sigue en la fila se escriba lo que se escriba.
+- **Intervalo** — día, semana o mes — cambia qué serie se dibuja, así que cambiarlo vuelve a consultar la fuente. **Tipo de dibujo** y **Animación** no; solo redibujan lo que ya está aquí.
+- **1, 5 y 15 minutos** se piden por un día, no por un intervalo: al elegir uno de ellos, la lista de intervalos se cambia por un selector de fecha. El grano de un minuto llega ocho días atrás, los otros dos sesenta, y no más — es lo que guarda la fuente, no un límite que ponga esta aplicación. Un coin cotiza las veinticuatro horas, así que un solo día ya son más de mil velas.
+- Una moneda cotiza todos los días del año: un rango no tiene festivos que saltar ni días que falten, y una moneda no paga dividendo ni hace split: el cierre *es* la rentabilidad, y en estas seis páginas no se aplica ningún ajuste.
+- Si solo se alcanza la fuente de respaldo, esta tiene un precio al día en lugar de cuatro, y entonces las velas y las barras se dibujan como línea: un cuerpo con dos mechas hecho de un solo cierre es una forma que la moneda nunca tuvo. La página lo dice bajo el selector de dibujo cuando ese es el caso.
+- Se pueden dibujar hasta seis monedas a la vez; una séptima pulsación no se acepta, porque una séptima curva tomaría un color que la sexta ya tiene. Comparadas se dibujan como variación acumulada, porque las monedas no cotizan en el mismo orden de magnitud.
+- **Estas seis páginas solo aparecen donde una fuente responde.** Ambas fuentes están fuera del alcance de China continental, así que un equipo allí simplemente no las ve en el menú: seis entradas que ofrecen datos que no pueden obtener serían seis entradas que fallan. Fuera de China, las criptomonedas son con diferencia el tema más buscado para un vídeo en el móvil, y estas seis páginas están hechas para eso: una moneda cotiza las veinticuatro horas, todos los días del año, sin festivo que saltar.
+
+## Plan DCA cripto
+
+![La página completa: vista previa a la izquierda, barra de reproducción abajo, ajustes a la derecha.](media/crypto-dca.png)
+
+Comprar una moneda con ritmo fijo — semanal, por ejemplo, o mensual — y cuánto vale ese plan hoy.
+
+- **Frecuencia** e **Importe** dicen cada cuánto y cuánto, en dólares estadounidenses. El plan compra el primer día de cada periodo que cubre el rango.
+- Lo que se dibuja es el dinero aportado contra lo que vale la posición, día a día, con las compras marcadas: una caída en la que compraste se lee distinto de una en la que no.
+- Se pueden comparar hasta seis planes. Comparados se dibujan como variación acumulada en lugar de dinero, para que una moneda a 60.000 dólares y otra a medio dólar puedan leerse juntas.
+- Una moneda listada después de que empezara el rango empieza en su propio primer día, y una moneda sin precio en todo el rango se nombra en la línea de estado en lugar de dibujarse como una línea plana.
+- Los días aquí son días naturales. Una moneda cotiza en todos ellos: un año de compras semanales son unas 52 compras y uno de mensuales, 12, y ninguna de las dos cifras es aproximada.
+
+## Rentabilidad de la cartera cripto
+
+![La página completa: vista previa a la izquierda, barra de reproducción abajo, ajustes a la derecha.](media/crypto-position.png)
+
+Una suma puesta en una moneda un día, y cuánto vale hoy.
+
+- **Capital** es la suma, en dólares estadounidenses; el rango dice el día en que entró y el día de parada. La página compra al primer cierre del rango y mantiene hasta el último.
+- Lo que se dibuja es el valor de la posición día a día contra el dinero aportado: la línea queda por encima de su punto de partida mientras la posición gana y por debajo cuando no.
+- Se pueden mantener hasta seis monedas a la vez; una séptima pulsación no se acepta. Comparadas, cada una se dibuja como variación acumulada en lugar de valor, para que dos monedas compradas a precios muy distintos puedan leerse juntas.
+- Los días aquí son días naturales, y una moneda cotiza en todos: un año de mantenimiento son unos 365 días, no los 243 que daría una bolsa.
+- Si solo se alcanza la fuente de respaldo, el rango que puede llenar es de about un año. La página dice entonces dónde empieza realmente el rango, en lugar de empezar silenciosamente más tarde que la fecha escrita.
+
+## Calendario de ganancias cripto
+
+![La página completa: vista previa a la izquierda, barra de reproducción abajo, ajustes a la derecha.](media/crypto-calendar.png)
+
+Una celda por día, coloreada según la variación de ese día.
+
+- **Una cuadrícula llena no son datos que falten.** Un calendario de acciones está lleno de huecos — fines de semana, festivos, suspensiones — y se lee como se ve un mercado. Una moneda cotiza todos los días del año, así que todas las casillas están rellenas: la imagen es más densa, no más larga, y lo que parece un festivo omitido es un mercado que nunca cierra.
+- **Rango** son tres, seis o doce meses, o un tramo propio. Un tramo propio se recorta a lo que la fuente tiene, y la página dice dónde empieza realmente el rango en lugar de empezar más tarde que la fecha escrita.
+- La primera celda siempre es 0 %: no hay un cierre previo dentro del rango, y buscarlo fuera haría que la primera casilla dependiera de un día que el calendario no muestra.
+- El color es la variación, no el importe negociado. El volumen de una moneda es una cantidad de monedas, y nada en esta cuadrícula se escala con él — de lo que trata el calendario es de hacia dónde fue el día y cuánto.
+- Los días aquí son días naturales. Un año en esta página son unas 365 celdas, no los 243 que daría una bolsa, y ninguna de las dos cifras es aproximada.
+
+## Historial de capitalización cripto
+
+![La página completa: vista previa a la izquierda, barra de reproducción abajo, ajustes a la derecha.](media/crypto-caphistory.png)
+
+La capitalización circulante de una moneda a lo largo del tiempo, con el precio de los mismos días debajo.
+
+- **Donde las dos líneas se separan, lo que se ve es emisión y quema.** El precio es lo que cuesta una moneda; la capitalización es ese precio por la cantidad de monedas existentes. Una línea de capitalización que sube mientras la del precio baja es oferta que crece, no una cifra equivocada.
+- **Esto se mide, no se extrapola.** Multiplicar el suministro de hoy por un precio antiguo es la forma barata de dibujar esta página, y produce dos líneas que son la misma línea: la capitalización no diría nada que el precio no diga ya. Lo que se dibuja aquí viene de la API pública de CoinMetrics, que lleva una capitalización circulante diaria: Bitcoin llega hasta 2010, las demás monedas hasta donde la fuente las tenga.
+- Aquí capitalización significa la *circulante* — las monedas ya emitidas y en circulación, no un cálculo totalmente diluido que supone todas las monedas que existirán.
+- La serie estimada que tiene cada moneda empieza en junio de 2019. Una moneda sin serie exacta empieza ahí, y la página dice dónde empieza realmente el rango en vez de empezar silenciosamente más tarde.
+- **Rango** son doce, veinticuatro, sesenta o ciento veinte meses, o un tramo propio. La historia de una moneda puede ser más corta que el rango pedido — eso es el suelo de la fuente, no una consulta que falló.
+
+## Carrera de capitalización cripto
+
+![La página completa: vista previa a la izquierda, barra de reproducción abajo, ajustes a la derecha.](media/crypto-marketcap.png)
+
+Las quince monedas con mayor capitalización hoy y cómo se movió ese orden día a día.
+
+- **El grupo se pregunta, no se escribe.** Al obtener los datos, la página toma las quince mayores por valor de mercado de la clasificación en vivo de CoinGecko; una moneda que creció hasta ese tamaño el año pasado está en el tablero sin que nadie edite una lista. Por eso tampoco hay selector de moneda aquí: el grupo es la respuesta, y lo que se pregunta es el tramo.
+- Los valores diarios vienen de CoinMetrics, una sola consulta para todo el tablero. Son la serie estimada de esa fuente, que empieza en junio de 2019 igual para todas las monedas, así que el rango se recorta ahí en vez de rechazarse: un tablero donde dos monedas tuvieran ocho años de historia y trece ninguna se leería como monedas que aparecieron de la nada.
+- **Las monedas estables se quedan.** Medido el 2026-10-11, las treinta primeras llevaban seis de ellas, y tether era la tercera cosa más grande de este mercado. Un tablero que las ocultara estaría ordenando otra cosa que el tamaño. Lo que hacen con la imagen es honesto: su línea es plana, porque un dólar vale un dólar, así que el tablero muestra de un vistazo cuáles de las cosas más grandes aquí se mueven de verdad.
+- Una moneda que la fuente de valores no tiene se descarta en lugar de dibujarse plana en cero: una línea plana en el fondo de una carrera de valor se lee como una moneda que acabó en nada. El tablero puede tener por tanto menos de quince, y la línea de estado dice cuántas llegaron.
+- **Rango** son doce, veinticuatro o sesenta meses, o un tramo propio, recortado a la serie estimada del mismo modo.
 
 ## Vídeo
 

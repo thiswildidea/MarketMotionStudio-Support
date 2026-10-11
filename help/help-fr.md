@@ -6,9 +6,11 @@ Cette application transforme des indicateurs du marché des actions A en vidéos
 
 Les paramètres déterminent de quel marché l'application tire ses cotations ; les actions A par défaut. Le changement prend effet après le redémarrage de l'application.
 
-- **Actions A** : les huit pages sont disponibles.
-- **Hong Kong** : la matrice des rendements et le calendrier fonctionnent ; la course de secteurs utilise les quatre sous-indices Hang Seng ; **il n'existe pas de chiffre pour l'ensemble du marché, cette page est donc masquée**.
-- **États-Unis** : la matrice des rendements et le calendrier fonctionnent ; la course de secteurs utilise dix ETF sectoriels SPDR ; la page des volumes ne garde que le mode quotidien, car le point d'accès minute ne sert pas de données américaines ; **les montants sont en dollars et la page du volume d'échanges du marché est masquée**.
+- **Le choix est enregistré, pas appliqué.** Rien ne change à l'écran avant le redémarrage de l'application : la phrase qui le dit s'affiche donc **en haut de la page de paramètres**, au-dessus des cartes et y reste fixée pendant le défilement, avec un bouton qui redémarre l'application pour vous.
+- **Actions A** : toutes les pages d'actions sont disponibles.À quoi il sert : le film du volume d'échanges du marché entier — le seul marché dont la source le publie — la course de secteurs sur les secteurs Shenwan de premier niveau, la course de capitalisation sur les quinze plus grandes du jour, et la prime AH, les deux cotations d'une même société l'une contre l'autre.
+- **Hong Kong** : la matrice des rendements et le calendrier fonctionnent ; la course de secteurs utilise les quatre sous-indices Hang Seng ; **il n'existe pas de chiffre pour l'ensemble du marché, cette page est donc masquée**.À quoi il sert : la matrice des rendements et le calendrier lus sur les indices et valeurs de Hong Kong, la course de secteurs sur les quatre sous-indices Hang Seng, et les trackers Hang Seng comme préréglages.
+- **États-Unis** : la matrice des rendements et le calendrier fonctionnent ; la course de secteurs utilise dix ETF sectoriels SPDR ; la page des volumes ne garde que le mode quotidien, car le point d'accès minute ne sert pas de données américaines ; **les montants sont en dollars et la page du volume d'échanges du marché est masquée**.À quoi il sert : la matrice des rendements et le calendrier lus sur les indices et valeurs américains, la course de secteurs sur dix ETF sectoriels SPDR, et les grands préréglages — SPY, QQQ, DIA.
+- **Cryptomonnaies** : proposé uniquement là où un cours peut être obtenu — ses deux sources sont hors de portée du continent. Le choisir garde les six pages crypto dans la navigation et retire toutes les pages d'actions, car celles-ci interrogent un point d'accès qui ne cote aucune cryptomonnaie. Les prix sont en dollars américains et une cryptomonnaie se négocie tous les jours de l'année : aucun jour ne manque.Hors de Chine continentale, les cryptomonnaies sont de loin le sujet le plus demandé pour une vidéo sur téléphone, et elles apportent six pages propres : les chandeliers d'une pièce, un plan d'achat programmé, le rendement d'une position, le calendrier et deux pages sur la capitalisation.
 
 
 
@@ -455,6 +457,80 @@ Un achat, conservé — un million du même nom depuis 2015 — animé pour mont
 - **Deux animations.** *Tracer tout l'intervalle* déploie toute la période d'un coup : la forme de la courbe à l'écran est sa forme dans le temps. *Fenêtre glissante* garde une fenêtre d'un nombre fixe de jours de cotation et la fait avancer du début à la fin de la période — c'est le seul moyen de garder lisibles les oscillations d'une longue série quotidienne : étalée sur douze ans, une baisse de trois mois fait deux pixels. La fenêtre ne compte qu'en défilement, et les deux animations lisent **les mêmes données** : en changer ne recharge rien.
 - **Une fenêtre défilante s'ouvre à la fin.** Au début du segment de fermeture la fenêtre s'élargit vers l'arrière jusqu'au premier jour de la plage : l'image sur laquelle l'animation s'arrête est donc la plage entière et non ses dernières dizaines de jours.
 - **La bande du côté droit peut être cédée, si vous voulez la largeur.** Elle est désactivée par défaut : la plateforme dessine son avatar et ses boutons « j'aime » et commentaire sur ce côté d'une vidéo verticale, et un chiffre en dessous est masqué sur le téléphone alors qu'il est parfaitement lisible ici. Activée, une image qui remplit toute la période trace jusqu'au bord même de l'image dès sa première image ; une fenêtre glissante continue de garder ses distances tant qu'elle est une fenêtre, et s'ouvre à la pleine largeur en même temps qu'elle — l'image sur laquelle la vidéo s'arrête est donc toute la période, d'un bord à l'autre.
+
+## Chandeliers crypto
+
+![La page en entier : aperçu à gauche, barre de lecture en bas, réglages à droite.](media/crypto-candle.png)
+
+Les chandeliers quotidiens d'une cryptomonnaie, en dollars américains, depuis une source publique. Les hebdomadaires et mensuels sont regroupés à partir de ces mêmes jours.
+
+- Les douze cryptomonnaies proposées sont celles que les deux sources portent avec des années d'historique quotidien. Le champ ci-dessus resserre la ligne sur ce qui est saisi : il correspond au nom qu'écrit cette langue d'interface ou au code — bit comme BTC trouvent Bitcoin. Une cryptomonnaie déjà choisie reste affichée quoi qu'on saisisse.
+- **Granularité** — jour, semaine ou mois — change la série tracée, et relance donc la récupération. **Type de tracé** et **Animation** non ; ils redessinent ce qui est déjà là.
+- **1, 5 et 15 minutes** se demandent pour un jour et non pour une période : en choisir une remplace la liste des périodes par un sélecteur de date. Le grain d'une minute remonte à huit jours, les deux autres à soixante, et pas au-delà — c'est ce que la source conserve, ce n'est pas une limite posée par cette application. Une cryptomonnaie se négocie à toute heure, donc une seule journée fait déjà plus de mille chandeliers.
+- Une cryptomonnaie se négocie tous les jours de l'année : un intervalle n'a aucun jour férié à sauter et aucun jour manquant, et une cryptomonnaie ne verse ni dividende ni ne fractionne : la clôture *est* le rendement, et aucun ajustement n'est appliqué sur ces six pages.
+- Si seule la source de repli est atteignable, elle n'a qu'un prix par jour au lieu de quatre, et chandeliers et barres sont alors tracés en ligne — un corps et deux mèches faits d'une seule clôture est une forme que la cryptomonnaie n'a jamais eue. La page le dit sous la liste de tracé lorsque c'est le cas.
+- Jusqu'à six cryptomonnaies peuvent être tracées à la fois ; une septième pression n'est pas acceptée, car une septième courbe prendrait une couleur que la sixième a déjà. Comparées, elles sont tracées en variation cumulée, parce qu'elles ne se négocient pas dans la même échelle de prix.
+- **Ces six pages n'apparaissent que là où une source répond.** Les deux sources sont hors de portée de la Chine continentale : une machine qui s'y trouve ne les voit tout simplement pas dans le menu — six entrées offrant des données qu'elles ne peuvent pas récupérer seraient six entrées qui échouent. Partout ailleurs, les cryptomonnaies sont de loin le sujet le plus recherché pour une vidéo sur téléphone, et ces six pages sont faites pour lui : une pièce se négocie vingt-quatre heures sur vingt-quatre, chaque jour de l'année, sans jour férié à sauter.
+
+## Plan DCA crypto
+
+![La page en entier : aperçu à gauche, barre de lecture en bas, réglages à droite.](media/crypto-dca.png)
+
+Acheter une cryptomonnaie à rythme fixe — hebdomadaire, disons, ou mensuel — et ce que ce plan vaut aujourd'hui.
+
+- **Fréquence** et **Montant** disent à quelle fréquence et combien, en dollars américains. Le plan achète le premier jour de chaque période couverte par l'intervalle.
+- Ce qui est tracé est l'argent versé contre la valeur de la position, jour par jour, avec les achats marqués : une baisse dans laquelle vous avez acheté se lit différemment d'une baisse dans laquelle vous n'avez pas acheté.
+- Jusqu'à six plans peuvent être comparés. Comparés, ils sont tracés en variation cumulée plutôt qu'en argent, pour qu'une cryptomonnaie à 60 000 dollars et une à un demi-dollar puissent se lire l'une contre l'autre.
+- Une cryptomonnaie cotée après le début de l'intervalle commence à son propre premier jour, et une cryptomonnaie sans prix dans tout l'intervalle est nommée sur la ligne d'état plutôt que tracée en ligne plate.
+- Les jours ici sont des jours civils. Une cryptomonnaie se négocie chacun d'eux : une année d'achats hebdomadaires représente environ 52 achats, une année d'achats mensuels 12, et aucun des deux chiffres n'est approximatif.
+
+## Rendement du portefeuille crypto
+
+![La page en entier : aperçu à gauche, barre de lecture en bas, réglages à droite.](media/crypto-position.png)
+
+Une somme placée dans une cryptomonnaie un jour donné, et ce qu'elle vaut aujourd'hui.
+
+- **Capital** est la somme, en dollars américains ; l'intervalle dit le jour de l'entrée et le jour d'arrêt. La page achète à la première clôture de l'intervalle et conserve jusqu'à la dernière.
+- Ce qui est tracé est la valeur de la position jour par jour contre l'argent versé : la ligne se situe au-dessus de son point de départ tant que la position est en gain, et en dessous lorsqu'elle ne l'est pas.
+- Jusqu'à six cryptomonnaies peuvent être détenues côte à côte ; une septième pression n'est pas acceptée. Comparées, chacune est tracée en variation cumulée plutôt qu'en valeur, pour que deux cryptomonnaies achetées à des prix très différents puissent se lire ensemble.
+- Les jours ici sont des jours civils, et une cryptomonnaie se négocie chacun d'eux : une année de détention représente environ 365 jours, et non les 243 que donnerait une bourse.
+- Si seule la source de repli est atteignable, l'intervalle qu'elle peut remplir est d'environ un an. La page dit alors où l'intervalle commence réellement, plutôt que de commencer silencieusement plus tard que la date saisie.
+
+## Calendrier des hausses et baisses crypto
+
+![La page en entier : aperçu à gauche, barre de lecture en bas, réglages à droite.](media/crypto-calendar.png)
+
+Une case par jour, colorée selon la variation de ce jour.
+
+- **Une grille pleine n'est pas une donnée manquante.** Un calendrier d'actions est surtout fait de trous — week-ends, jours fériés, suspensions — et se lit comme un marché se voit. Une cryptomonnaie se négocie tous les jours de l'année, donc chaque case est remplie : l'image est plus dense, non plus longue, et ce qui ressemble à un jour férié manquant est un marché qui ne ferme jamais.
+- **Intervalle** : trois, six ou douze mois, ou une période de votre choix. Une période libre est ramenée à ce que la source possède, et la page dit où l'intervalle commence réellement plutôt que de commencer plus tard que la date saisie.
+- La première case est toujours à 0 % : il n'y a pas de clôture précédente dans l'intervalle, et aller la chercher au-dehors ferait dépendre la première case d'un jour que le calendrier ne montre pas.
+- La couleur est la variation, pas le montant échangé. Le volume d'une cryptomonnaie est un nombre de jetons, et rien dans cette grille n'est mis à l'échelle avec lui — ce qui intéresse le calendrier, c'est de quel côté la journée est allée et de combien.
+- Les jours ici sont des jours civils. Une année sur cette page représente environ 365 cases, et non les 243 que donnerait une bourse, et aucun des deux chiffres n'est approximatif.
+
+## Historique de capitalisation crypto
+
+![La page en entier : aperçu à gauche, barre de lecture en bas, réglages à droite.](media/crypto-caphistory.png)
+
+La capitalisation circulante d'une cryptomonnaie au fil du temps, avec le cours des mêmes jours en dessous.
+
+- **Là où les deux lignes s'écartent, on voit l'émission et la destruction.** Le cours est ce que coûte un jeton ; la capitalisation est ce cours multiplié par le nombre de jetons existants. Une ligne de capitalisation qui monte pendant que celle du cours descend, c'est l'offre qui grandit, pas un chiffre erroné.
+- **C'est mesuré, pas extrapolé.** Multiplier l'offre actuelle par un ancien cours est la manière bon marché de tracer cette page, et cela produit deux lignes qui sont la même ligne : la capitalisation ne dirait rien que le cours ne dise déjà. Ce qui est tracé ici vient de l'API publique CoinMetrics, qui porte une capitalisation circulante quotidienne : Bitcoin remonte à 2010, les autres cryptomonnaies aussi loin que la source les garde.
+- Ici, capitalisation signifie la capitalisation *circulante* — les jetons déjà émis et en circulation, et non une valorisation entièrement diluée qui suppose tous les jetons qui existeront.
+- La série estimée que porte chaque cryptomonnaie commence en juin 2019. Une cryptomonnaie sans série exacte commence là, et la page dit où l'intervalle commence réellement au lieu de commencer discrètement plus tard.
+- **Intervalle** : douze, vingt-quatre, soixante ou cent vingt mois, ou une période de votre choix. L'historique d'une cryptomonnaie peut être plus court que l'intervalle demandé — c'est le plancher de la source, pas une récupération qui a échoué.
+
+## Course des capitalisations crypto
+
+![La page en entier : aperçu à gauche, barre de lecture en bas, réglages à droite.](media/crypto-marketcap.png)
+
+Les quinze cryptomonnaies à la plus forte capitalisation aujourd'hui, et l'évolution de cet ordre jour après jour.
+
+- **Le plateau est demandé, pas écrit.** Au moment de la récupération, la page prend les quinze plus fortes par valeur de marché dans le classement en direct de CoinGecko ; une cryptomonnaie devenue assez grosse l'année dernière figure donc au tableau sans que personne n'édite une liste. C'est aussi pourquoi il n'y a pas de sélecteur de cryptomonnaie ici : le plateau est la réponse, et ce qui est demandé, c'est la période.
+- Les valeurs quotidiennes viennent de CoinMetrics, une seule requête pour tout le tableau. C'est la série estimée de cette source, qui commence en juin 2019 de la même façon pour toutes : l'intervalle y est donc ramené plutôt que refusé — un tableau où deux cryptomonnaies auraient huit ans d'historique et treize aucun se lirait comme des cryptomonnaies apparues de nulle part.
+- **Les stablecoins y restent.** Mesuré le 2026-10-11, les trente premières en comptaient six, et tether était la troisième plus grosse chose de ce marché. Un tableau qui les cacherait classerait autre chose que la taille. Ce qu'elles font à l'image est honnête : leur ligne est plate, parce qu'un dollar vaut un dollar, si bien que le tableau montre d'un coup d'œil lesquelles des plus grosses choses ici bougent réellement.
+- Une cryptomonnaie que la source de valeurs ne porte pas est retirée plutôt que tracée à plat sur zéro : une ligne plate en bas d'une course de valeurs se lit comme une cryptomonnaie réduite à rien. Le tableau peut donc compter moins de quinze, et la ligne d'état dit combien il en a eu.
+- **Intervalle** : douze, vingt-quatre ou soixante mois, ou une période de votre choix, ramenée à la série estimée de la même manière.
 
 ## Vidéo
 

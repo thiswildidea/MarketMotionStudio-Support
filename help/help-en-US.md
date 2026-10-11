@@ -6,9 +6,11 @@ This app turns A-share market indicators into vertical videos for phones. You pi
 
 Settings picks which market the app takes its quotes from; A-shares by default. A change takes effect after the app is restarted.
 
-- **A-shares**: all eight pages are available.
-- **Hong Kong**: the return matrix and the gain-loss calendar work; the sector race runs on the four Hang Seng sub-indices; **there is no whole-market turnover figure, so that page is hidden**.
-- **United States**: the return matrix and the gain-loss calendar work; the sector race runs on ten SPDR sector ETFs; the volume page keeps its daily mode only, because the minute endpoint serves no US data; **amounts are quoted in dollars, and the whole-market turnover page is hidden**.
+- **The choice is stored, not applied.** Nothing on screen changes until the app is restarted, so the line saying so appears at the **top of the Settings page**, above the cards and fixed there as you scroll, with a button that restarts the app for you.
+- **A-shares**: every stock page is available. What it is for: the whole-market turnover reel — the only market whose source reports one — the sector race across the Shenwan level-one sectors, the market cap race over today's largest fifteen, and AH premium, one company's two listings against each other.
+- **Hong Kong**: the return matrix and the gain-loss calendar work; the sector race runs on the four Hang Seng sub-indices; **there is no whole-market turnover figure, so that page is hidden**. What it is for: the return matrix and the calendar read on Hong Kong indices and listings, four Hang Seng sub-indices racing, and the Hang Seng trackers as presets.
+- **United States**: the return matrix and the gain-loss calendar work; the sector race runs on ten SPDR sector ETFs; the volume page keeps its daily mode only, because the minute endpoint serves no US data; **amounts are quoted in dollars, and the whole-market turnover page is hidden**. What it is for: the return matrix and the calendar read on US indices and listings, ten SPDR sector ETFs racing, and the broad presets — SPY, QQQ, DIA.
+- **Cryptocurrency**: offered only where a price can be fetched — both of its sources are outside the mainland's reach. Choosing it leaves the six crypto pages in the navigation and takes every stock page out, because those read an endpoint that quotes no coin at all. Prices are in US dollars and a coin trades every day of the year, so no day is missing. Outside mainland China, crypto is by a wide margin the most-watched thing to put on a phone screen, and it brings six pages of its own: one coin's candles, a DCA plan, a holding's return, the gain calendar, and two pages about market cap.
 
 
 
@@ -440,6 +442,80 @@ One purchase, held — a million of the same name since 2015 — animated to sho
 - **Two motions.** *Grow across the span* lays the whole range down at once, so the curve's shape on screen is its shape in time. *Scroll a window* holds a window of a fixed number of trading days and walks it from the start of the range to its end — the only way a long daily series keeps its wobbles readable, since spread over twelve years a three-month fall is two pixels. The window only counts while scrolling, and both motions read **the same marks**: switching re-fetches nothing.
 - **A scrolling window opens out at the end.** As the closing stretch begins the window widens back towards the first day of the range, so the frame the animation stops on is the whole span rather than the last few dozen days of it.
 - **The band down the right-hand side can be given up, if you want the width.** It is off by default: the platform draws its avatar and its like and comment buttons down that side of a vertical video, and a figure underneath them is hidden on the phone even though it is perfectly readable here. Turned on, a frame filling the whole span draws to the frame's own edge from its first frame on; a scrolling window still keeps clear while it is a window, and opens out into the full width along with the window — so the frame the video stops on is the whole span, edge to edge.
+
+## Crypto Candles
+
+![The page in full: preview on the left, scrubber below, settings on the right.](media/crypto-candle.png)
+
+One coin's daily prices as candles, in US dollars, from a public source. Weekly and monthly are gathered from those same days.
+
+- The twelve coins on offer are the ones both sources carry with years of daily history behind them. The box above narrows the row to what is typed, matching the name this interface language spells or the code — type bit or BTC and Bitcoin is what comes up. A coin already chosen stays on the row whatever is typed, so the count below always has its coins on screen.
+- **Period** — day, week or month — changes which series is drawn, so changing it fetches again. **Style** and **Motion** do not; they redraw what is already here.
+- **1, 5 and 15 minutes** are asked for a day rather than for a span: choosing one of them swaps the span list for a date picker. The one-minute grain reaches back eight days, the other two sixty, and no further — that is how much the source keeps, not a limit this app chose. A coin trades through every hour of the day, so one day is already upwards of a thousand candles.
+- A coin trades every day of the year, so a range has no holiday to step over and no day missing from it, and a coin neither pays a dividend nor splits: the close *is* the return, and no adjustment is applied anywhere on these six pages.
+- When only the fallback source can be reached, it has one price a day rather than four, and candles and bars are then drawn as a line — a body and two wicks made out of a single close is a shape the coin never made. The page says so under the style box when that is the case.
+- Up to six coins can be drawn at once; a seventh press is not accepted, because a seventh curve would take a colour the sixth already has. Compared side by side they are drawn as cumulative change, since the coins are not priced in the same range.
+- **These six pages appear only where a source answers.** Both sources sit outside mainland China, so a machine inside it never sees them in the menu — six items offering data they cannot fetch would be six items that fail. Everywhere else, crypto is by a wide margin the most-watched market to put on a phone screen, and these are the pages for it: a coin trades around the clock, every day of the year, with no holiday to step over.
+
+## Crypto DCA Plan
+
+![The page in full: preview on the left, scrubber below, settings on the right.](media/crypto-dca.png)
+
+Buying one coin on a fixed rhythm — weekly, say, or monthly — and what that plan is worth today.
+
+- **Frequency** and **Amount** say how often and how much, in US dollars. The plan buys on the first day of each period the range covers.
+- What is drawn is the money put in against what the holding is worth, day by day, with the buys marked: a fall you bought into reads differently from one you did not.
+- Up to six plans can be compared. Compared, they are drawn as cumulative change rather than as money, so a coin priced at 60,000 dollars and one priced at half a dollar can be read against each other.
+- A coin listed after the range began starts at its own first day, and a coin with no price anywhere in the range is named on the status line rather than drawn as a flat line.
+- Days here are calendar days. A coin trades on every one of them, so a year of weekly buying is about 52 buys and a year of monthly buying is 12, and neither figure is approximated.
+
+## Crypto Holdings Return
+
+![The page in full: preview on the left, scrubber below, settings on the right.](media/crypto-position.png)
+
+A sum put into one coin on a day, and what it is worth now.
+
+- **Capital** is the sum, in US dollars; the range says the day it went in and the day to stop. The page buys at the first close in the range and holds to the last.
+- What is drawn is the holding's value day by day against the money that went in, so the line sits above its starting point while the holding is ahead and below it when it is not.
+- Up to six coins can be held side by side; a seventh press is not accepted. Compared, each is drawn as cumulative change rather than as value, so two coins bought at very different prices can be read together.
+- Days here are calendar days, and a coin trades on every one of them: a year of holding is about 365 days, not the 243 a stock market would give you.
+- If only the fallback source can be reached, the range it can fill is about a year. The page then says where the range really starts, rather than quietly beginning later than the date that was typed.
+
+## Crypto Gain Calendar
+
+![The page in full: preview on the left, scrubber below, settings on the right.](media/crypto-calendar.png)
+
+One cell per day, coloured by that day's change.
+
+- **A full grid is not missing data.** A stock calendar is mostly holes — weekends, holidays, suspensions — and reads the way a market looks. A coin trades every day of the year, so every square is filled: the picture is denser rather than longer, and what looks like a missing holiday is a market that never closes.
+- **Range** is three, six or twelve months, or a span of your own. A custom span is clipped to what the source carries, and the page says where the range really starts rather than beginning later than the date that was typed.
+- The first cell is always 0%: there is no prior close inside the range, and reaching outside it for one would make the first cell depend on a day the calendar does not show.
+- The colour is the change, not the amount traded. A coin's volume is a count of coins, and nothing on this grid is scaled against it — what the calendar is about is which way the day went and by how much.
+- Days here are calendar days. A year of this page is about 365 cells, not the 243 a stock market would give you, and neither figure is approximated.
+
+## Crypto Market Cap History
+
+![The page in full: preview on the left, scrubber below, settings on the right.](media/crypto-caphistory.png)
+
+One coin's circulating market cap over time, with the price over the same days beneath it.
+
+- **Where the two lines pull apart, you are looking at issuance and burns.** The price is what one coin costs; the cap is that price times however many coins exist. A cap line that rises while the price line falls is supply growing, not a figure that went wrong.
+- **This is measured, not extrapolated.** Multiplying today's supply by an old price is the cheap way to draw this page, and it produces two lines that are the same line — the cap would say nothing the price does not already say. What is drawn here comes from CoinMetrics' public API, which carries a daily circulating cap: Bitcoin reaches back to 2010, other coins as far as the source holds them.
+- Market cap here means *circulating* cap — the coins already issued and in circulation, not a fully diluted count that assumes every coin that will ever exist.
+- The estimate series every coin carries starts in June 2019. A coin with no exact series begins there, and the page says where the range really starts instead of quietly beginning later.
+- **Range** is twelve, twenty-four, sixty or one hundred and twenty months, or a span of your own. A coin's history may be shorter than the range you asked for — that is the source's floor, not a fetch that failed.
+
+## Crypto Market Cap Race
+
+![The page in full: preview on the left, scrubber below, settings on the right.](media/crypto-marketcap.png)
+
+The fifteen coins with the largest market cap today, and how that order moved day by day.
+
+- **The field is asked for, not written down.** At fetch time the page takes the current top fifteen by market value from CoinGecko's live ranking, so a coin that grew into this size last year is on the board without anybody editing a list. That is also why there is no coin picker here: the field itself is the answer, and what the page asks is which span.
+- The day-by-day values come from CoinMetrics, one request for the whole board. They are that source's estimate series, which starts in June 2019 for every coin alike, so the range is clipped there rather than refused — a board on which two coins had eight years of history and thirteen had none would read as coins that appeared out of nowhere.
+- **Stablecoins stay on it.** Measured on 2026-10-11, the top thirty carried six of them, and tether was the third largest thing on this market. A board that hid them would be ranking something other than size. What they do to the picture is honest: their line is flat, because a dollar is worth a dollar, so the board shows at a glance which of the largest things here actually move.
+- A coin the value source does not carry is dropped rather than drawn flat at zero — a flat line at the bottom of a value race reads as a coin that went to nothing. The board can therefore hold fewer than fifteen, and the status line says how many it got.
+- **Range** is twelve, twenty-four or sixty months, or a span of your own, clipped to the estimate series the same way.
 
 ## Video
 

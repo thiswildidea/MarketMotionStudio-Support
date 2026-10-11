@@ -4,10 +4,12 @@ title: Support
 
 # Market Motion Studio — Support
 
-A Windows desktop application that turns stock-market indicators into vertical
+A Windows desktop application that turns market indicators into vertical
 (9:16) animated videos: whole-market daily turnover, sector races, monthly
 returns, a buy-and-hold position replayed day by day, a recurring investment
-plan — for the China A-share, Hong Kong and US markets — exported as H.264 MP4
+plan, a market-cap race — for the China A-share, Hong Kong and US markets,
+with a fourth market of its own for cryptocurrency, which is offered outside
+mainland China (both of its price sources sit abroad) — exported as H.264 MP4
 ready to post.
 
 ## Getting help
@@ -16,8 +18,8 @@ Email **gaqo@outlook.com**. It helps to include:
 
 - what you were trying to do,
 - what the application said, word for word,
-- which market you had selected (A-share / Hong Kong / US) and which stock
-  or index.
+- which market you had selected (A-share / Hong Kong / US, or cryptocurrency)
+  and which stock, index or coin.
 
 Please do not attach passwords or files from the application's storage folder.
 None of those are needed to diagnose a problem — the application has no
@@ -55,7 +57,7 @@ three details are the difference between a guess and a fix.
 
 # Market Motion Studio — 支持
 
-一款把行情指标做成竖屏（9:16）动画视频的 Windows 桌面应用：全市场成交额、行业板块竞速、月度收益、逐日盯市的持仓回放、定投计划——覆盖A股、港股、美股三个市场——导出为可直接发布的 H.264 MP4。
+一款把行情指标做成竖屏（9:16）动画视频的 Windows 桌面应用：全市场成交额、行业板块竞速、月度收益、逐日盯市的持仓回放、定投计划、市值竞速——覆盖A股、港股、美股，另有加密货币这第四个市场（只在中国大陆以外提供，它的两个行情源都在境外）——导出为可直接发布的 H.264 MP4。
 
 ## 获取帮助
 
@@ -63,7 +65,7 @@ three details are the difference between a guess and a fix.
 
 - 你当时想做什么；
 - 应用原话说了什么（请照抄）；
-- 你选的是哪个市场（A股 / 港股 / 美股），以及哪只股票或指数。
+- 你选的是哪个市场（A股 / 港股 / 美股，或加密货币），以及哪只股票、指数或币种。
 
 请**不要**附上密码或应用存储文件夹里的文件。诊断问题不需要这些——本应用没有账号体系、不存密码，存储文件夹里只有你的设置和一份本地崩溃日志。
 

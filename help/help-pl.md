@@ -6,9 +6,11 @@ Ta aplikacja zamienia wskaźniki rynku akcji A w pionowe filmy na telefon. Wybie
 
 W ustawieniach wybiera się, z którego rynku aplikacja pobiera notowania; domyślnie akcje A. Zmiana działa po ponownym uruchomieniu aplikacji.
 
-- **Akcje A**: dostępnych jest wszystkich osiem stron.
-- **Hongkong**: macierz stóp zwrotu i kalendarz działają; wyścig sektorów korzysta z czterech subindeksów Hang Seng; **nie ma danych dla całego rynku, więc ta strona jest ukryta**.
-- **USA**: macierz stóp zwrotu i kalendarz działają; wyścig sektorów korzysta z dziesięciu sektorowych ETF-ów SPDR; strona wolumenu ma tylko tryb dzienny, bo minutowy endpoint nie obsługuje danych z USA; **kwoty są w dolarach, a strona obrotu całego rynku jest ukryta**.
+- **Wybór jest zapisywany, nie stosowany.** Na ekranie nic się nie zmieni, dopóki aplikacja nie zostanie ponownie uruchomiona, więc odpowiedni komunikat pojawia się **na górze strony ustawień**, nad kartami i pozostaje tam podczas przewijania, z przyciskiem, który uruchomi aplikację ponownie za Ciebie.
+- **Akcje A**: wszystkie strony akcyjne są dostępne.Do czego służy: film obrotu całego rynku — jedyny rynek, którego źródło go podaje — wyścig sektorów na sektorach Shenwan pierwszego poziomu, wyścig kapitalizacji piętnastu największych dnia oraz premia AH, czyli dwie notowania tej samej spółki wobec siebie.
+- **Hongkong**: macierz stóp zwrotu i kalendarz działają; wyścig sektorów korzysta z czterech subindeksów Hang Seng; **nie ma danych dla całego rynku, więc ta strona jest ukryta**.Do czego służy: macierz stóp zwrotu i kalendarz czytane na indeksach i spółkach Hongkongu, wyścig sektorów na czterech subindeksach Hang Seng oraz trackery Hang Seng jako ustawienia domyślne.
+- **USA**: macierz stóp zwrotu i kalendarz działają; wyścig sektorów korzysta z dziesięciu sektorowych ETF-ów SPDR; strona wolumenu ma tylko tryb dzienny, bo minutowy endpoint nie obsługuje danych z USA; **kwoty są w dolarach, a strona obrotu całego rynku jest ukryta**.Do czego służy: macierz stóp zwrotu i kalendarz czytane na amerykańskich indeksach i spółkach, wyścig sektorów na dziesięciu sektorowych ETF-ach SPDR oraz szerokie ustawienia domyślne — SPY, QQQ, DIA.
+- **Kryptowaluty**: oferowane tylko tam, gdzie da się pobrać cenę — oba jego źródła są poza zasięgiem kontynentu. Wybranie go zostawia w nawigacji sześć stron krypto, a usuwa wszystkie strony akcyjne, bo one czytają endpoint, który nie notuje żadnej monety. Ceny są w dolarach amerykańskich, a moneta jest notowana każdego dnia roku, więc żaden dzień nie brakuje.Poza Chinami kryptowaluty są zdecydowanie najczęściej szukanym tematem na wideo w telefonie i mają sześć własnych stron: świece jednej monety, plan regularnego kupna, wynik pozycji, kalendarz oraz dwie strony o kapitalizacji.
 
 
 
@@ -433,6 +435,80 @@ Jeden zakup, trzymany długo — milion w tym samym instrumencie od 2015 roku �
 - **Dwa tryby animacji.** *Cały zakres naraz* rozkłada cały okres za jednym razem, więc kształt krzywej na ekranie to jej kształt w czasie. *Przesuwne okno* utrzymuje okno o stałej liczbie dni sesyjnych i przesuwa je od początku do końca okresu — tylko tak długa seria dzienna zachowuje czytelne wahania: rozłożona na dwanaście lat, trzymiesięczny spadek to dwa piksele. Okno liczy się tylko przy przewijaniu, a oba tryby czytają **te same dane** — przełączenie nic nie pobiera ponownie.
 - **Przesuwne okno otwiera się na końcu.** Wraz z początkiem końcowego odcinka okno rozszerza się wstecz aż do pierwszego dnia zakresu, więc klatka, na której animacja się zatrzymuje, pokazuje cały zakres, a nie jego ostatnie kilkadziesiąt dni.
 - **Pas po prawej stronie można oddać, jeśli zależy ci na szerokości.** Domyślnie jest wyłączony: platforma rysuje tam swój awatar oraz przyciski „lubię to” i komentarzy w pionowym wideo, a liczba pod nimi jest na telefonie zasłonięta, choć tutaj widać ją bez problemu. Włączony: kadr wypełniający cały zakres rysuje do własnej krawędzi kadru od pierwszej klatki; przesuwne okno zachowuje odstęp, dopóki jest oknem, i wraz z oknem rozwiera się na pełną szerokość — więc klatka, na której zatrzymuje się film, to cały zakres od krawędzi do krawędzi.
+
+## Świece krypto
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/crypto-candle.png)
+
+Dzienne świece jednej monety, w dolarach amerykańskich, z publicznego źródła. Tygodniowe i miesięczne są grupowane z tych samych dni.
+
+- Dwanaście oferowanych monet to te, dla których oba źródła mają lata historii dziennej. Pole powyżej zawęża wiersz do wpisanego tekstu: pasuje do nazwy, którą zapisuje ten język interfejsu, albo do kodu — bit i BTC znajdują Bitcoin. Wybrana moneta zostaje w wierszu niezależnie od wpisanego tekstu.
+- **Interwał** — dzień, tydzień lub miesiąc — zmienia to, która seria jest rysowana, więc zmiana go pobiera dane od nowa. **Styl** i **Przebieg** nie: one tylko przerysowują to, co już jest.
+- **1, 5 i 15 minut** pyta o dzień, nie o zakres: wybranie jednej z nich zamienia listę zakresów na wybór daty. Ziarno jednominutowe sięga osiem dni wstecz, dwa pozostałe sześćdziesiąt, i ani dnia dalej — tyle trzyma źródło, to nie limit narzucony przez tę aplikację. Coin handluje przez całą dobę, więc jeden dzień to już ponad tysiąc świec.
+- Moneta jest notowana każdego dnia roku: zakres nie ma świąt do przeskoczenia ani brakujących dni, a moneta nie płaci dywidendy ani nie dzieli się — kurs zamknięcia *jest* zwrotem i na tych sześciu stronach nie stosuje się żadnej korekty.
+- Gdy dostępne jest tylko źródło zapasowe, ma ono jedną cenę dziennie zamiast czterech, i wtedy świece oraz słupki są rysowane jako linia: korpus z dwoma knotami zrobiony z jednego zamknięcia to kształt, którego moneta nigdy nie miała. Strona mówi o tym pod listą stylu, gdy tak właśnie jest.
+- Jednocześnie można rysować do sześciu monet; siódme naciśnięcie nie jest przyjmowane, bo siódma krzywa wzięłaby kolor, który ma już szósta. W porównaniu rysowane są jako skumulowana zmiana, bo monety nie mają cen w tej samej skali.
+- **Te sześć stron pojawia się tylko tam, gdzie jakieś źródło odpowie.** Oba źródła są poza zasięgiem Chin kontynentalnych, więc komputer tam po prostu nie dostaje ich w menu: sześć pozycji oferujących dane, których nie mogą pobrać, byłoby sześcioma pozycjami, które zawodzą. Poza Chinami kryptowaluty są zdecydowanie najczęściej szukanym tematem na pionowe wideo i właśnie dla niego jest tych sześć stron: moneta jest notowana przez całą dobę, każdego dnia roku, bez świąt do pominięcia.
+
+## Plan DCA krypto
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/crypto-dca.png)
+
+Kupowanie jednej monety w stałym rytmie — powiedzmy tygodniowym lub miesięcznym — i ile ten plan jest dziś wart.
+
+- **Częstotliwość** i **Kwota** mówią jak często i ile, w dolarach amerykańskich. Plan kupuje pierwszego dnia każdego okresu objętego zakresem.
+- Rysowane są wpłacone pieniądze przeciwko wartości pozycji, dzień po dniu, z zaznaczonymi zakupami: spadek, w który kupowałeś, czyta się inaczej niż taki, w który nie kupowałeś.
+- Można porównać do sześciu planów. W porównaniu rysowane są jako skumulowana zmiana, a nie jako pieniądze, żeby moneta po 60 000 dolarów i moneta po pół dolara dały się czytać obok siebie.
+- Moneta notowana po rozpoczęciu zakresu zaczyna od własnego pierwszego dnia, a moneta bez ceny w całym zakresie jest wymieniona w linii stanu zamiast narysowana jako płaska linia.
+- Dni to tu dni kalendarzowe. Moneta jest notowana w każdy z nich: rok tygodniowych zakupów to około 52 zakupy, rok miesięcznych to 12 i żadna z tych liczb nie jest przybliżona.
+
+## Zwrot portfela krypto
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/crypto-position.png)
+
+Kwota włożona w jedną monetę pewnego dnia i ile jest dziś warta.
+
+- **Kapitał** to kwota w dolarach amerykańskich; zakres mówi, którego dnia weszła i którego dnia skończyć. Strona kupuje po pierwszym zamknięciu w zakresie i trzyma do ostatniego.
+- Rysowana jest wartość pozycji dzień po dniu przeciwko wpłaconym pieniądzom: linia jest powyżej punktu startu, dopóki pozycja jest na plusie, a poniżej, gdy nie jest.
+- Obok siebie można trzymać do sześciu monet; siódme naciśnięcie nie jest przyjmowane. W porównaniu każda jest rysowana jako skumulowana zmiana, a nie jako wartość, żeby dwie monety kupione po bardzo różnych cenach dały się czytać razem.
+- Dni to tu dni kalendarzowe i moneta jest notowana w każdy z nich: rok trzymania to około 365 dni, a nie 243, które dałaby giełda.
+- Gdy dostępne jest tylko źródło zapasowe, jego zakres to około rok. Strona mówi wtedy, gdzie zakres naprawdę się zaczyna, zamiast po cichu zacząć później niż wpisana data.
+
+## Kalendarz zmian krypto
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/crypto-calendar.png)
+
+Jedno pole na dzień, pokolorowane według zmiany tego dnia.
+
+- **Pełna siatka to nie brakujące dane.** Kalendarz akcji to w większości luki — weekendy, święta, zawieszenia — i czyta się go tak, jak wygląda rynek. Moneta jest notowana każdego dnia roku, więc każde pole jest wypełnione: obraz jest gęstszy, nie dłuższy, a to, co wygląda na pominięte święto, jest rynkiem, który nigdy się nie zamyka.
+- **Zakres** to trzy, sześć lub dwanaście miesięcy albo własny przedział. Własny przedział jest przycinany do tego, co ma źródło, a strona mówi, gdzie zakres naprawdę się zaczyna, zamiast zacząć później niż wpisana data.
+- Pierwsze pole to zawsze 0 %: w zakresie nie ma wcześniejszego zamknięcia, a sięganie po nie spoza zakresu uzależniałoby pierwsze pola od dnia, którego kalendarz nie pokazuje.
+- Kolor to zmiana, nie obrót. Wolumen monety to liczba monet i nic w tej siatce nie jest według niego skalowane — kalendarz mówi o tym, w którą stronę poszedł dzień i jak daleko.
+- Dni to tu dni kalendarzowe. Rok na tej stronie to około 365 pól, nie 243, które dałaby giełda, i żadna z tych liczb nie jest przybliżona.
+
+## Historia kapitalizacji krypto
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/crypto-caphistory.png)
+
+Krążąca kapitalizacja jednej monety w czasie, a pod nią kurs w tych samych dniach.
+
+- **Tam, gdzie obie linie się rozchodzą, widać emisję i spalanie.** Kurs to cena jednej monety; kapitalizacja to ten kurs razy liczba istniejących monet. Linia kapitalizacji rosnąca, gdy linia kursu spada, to rosnąca podaż, nie zła liczba.
+- **To jest mierzone, nie ekstrapolowane.** Pomnożenie dzisiejszej podaży przez stary kurs to tani sposób na narysowanie tej strony i daje dwie linie, które są jedną linią: kapitalizacja nie powiedziałaby niczego, czego kurs już nie mówi. To, co jest tu rysowane, pochodzi z publicznego API CoinMetrics, które prowadzi dzienną kapitalizację krążącą: Bitcoin sięga 2010 roku, pozostałe monety tak daleko, jak źródło je przechowuje.
+- Kapitalizacja oznacza tu kapitalizację *krążącą* — monety już wyemitowane i będące w obiegu, nie rozwodnioną wartość zakładającą wszystkie monety, które kiedykolwiek powstaną.
+- Seria szacunkowa, którą ma każda moneta, zaczyna się w czerwcu 2019. Moneta bez dokładnej serii zaczyna tam, a strona mówi, gdzie zakres naprawdę się zaczyna, zamiast po cichu zacząć później.
+- **Zakres** to dwanaście, dwadzieścia cztery, sześćdziesiąt lub sto dwadzieścia miesięcy albo własny przedział. Historia monety może być krótsza niż żądany zakres — to dolna granica źródła, nie nieudane pobranie.
+
+## Wyścig kapitalizacji krypto
+
+![Strona w całości: podgląd po lewej, pasek odtwarzania poniżej, ustawienia po prawej.](media/crypto-marketcap.png)
+
+Piętnaście monet o największej kapitalizacji dziś i jak ten porządek zmieniał się dzień po dniu.
+
+- **O tym składzie się pyta, nie zapisuje go z góry.** Przy pobieraniu strona bierze piętnaście największych według wartości rynkowej z aktualnego rankingu CoinGecko; moneta, która urosła do tego rozmiaru w zeszłym roku, jest więc w tabeli, bez tego żeby ktoś edytował listę. Dlatego nie ma tu też wyboru monety: skład jest odpowiedzią, a pytanie dotyczy przedziału.
+- Wartości dzienne pochodzą z CoinMetrics, jedno zapytanie dla całej tabeli. To seria szacunkowa tego źródła, która zaczyna się w czerwcu 2019 tak samo dla wszystkich, więc zakres jest tam przycinany zamiast odrzucany: tabela, w której dwie monety miałyby osiem lat historii, a trzynaście żadnej, czytałaby się jak monety, które pojawiły się znikąd.
+- **Stablecoiny zostają.** Zmierzone 2026-10-11: w pierwszej trzydziestce było ich sześć, a tether był trzecią co do wielkości rzeczą na tym rynku. Tabela, która by je ukryła, porządkowałaby coś innego niż wielkość. To, co robią z obrazem, jest uczciwe: ich linia jest płaska, bo dolar jest wart dolara, więc tabela pokazuje na pierwszy rzut oka, które z największych rzeczy tu naprawdę się poruszają.
+- Moneta, której źródło wartości nie ma, jest pomijana zamiast rysowana płasko przy zerze: płaska linia na dole wyścigu wartości czyta się jak moneta, która spadła do zera. Tabela może więc mieć mniej niż piętnaście pozycji, a linia stanu mówi, ile ich zostało.
+- **Zakres** to dwanaście, dwadzieścia cztery lub sześćdziesiąt miesięcy albo własny przedział, przycinany do serii szacunkowej w ten sam sposób.
 
 ## Film
 

@@ -6,9 +6,11 @@ Bu uygulama A hisse piyasasının göstergelerini telefon için dikey videolara 
 
 Ayarlarda uygulamanın hangi piyasadan fiyat aldığı seçilir; varsayılan A hisseleri. Değişiklik uygulama yeniden başlatıldıktan sonra geçerli olur.
 
-- **A hisseleri**: sekiz sayfanın tümü kullanılabilir.
-- **Hong Kong**: getiri matrisi ve takvim çalışır; sektör yarışı dört Hang Seng alt endeksiyle koşulur; **tüm piyasa için veri yok, bu yüzden o sayfa gizlenir**.
-- **ABD**: getiri matrisi ve takvim çalışır; sektör yarışı on SPDR sektör ETF'i ile koşulur; hacim sayfasında yalnızca günlük mod kalır, çünkü dakikalık uç nokta ABD verisi sunmaz; **tutarlar dolar cinsindendir ve tüm piyasa hacmi sayfası gizlenir**.
+- **Seçim kaydedilir, uygulanmaz.** Uygulama yeniden başlatılana kadar ekranda hiçbir şey değişmez; bu yüzden bunu söyleyen satır **Ayarlar sayfasının en üstünde**, kartların üzerinde görünür ve sayfayı kaydırdığınızda orada sabit kalır; yanındaki düğme uygulamayı sizin için yeniden başlatır.
+- **A hisseleri**: tüm hisse sayfaları kullanılabilir.Ne için: tüm piyasanın hacim filmi — bu sayıyı yayınlayan kaynağı olan tek piyasa — Shenwan birinci düzey sektörlerinde sektör yarışı, günün en büyük on beş şirketinin piyasa değeri yarışı ve AH primi, yani aynı şirketin iki kotasyonunun karşı karşıya gelmesi.
+- **Hong Kong**: getiri matrisi ve takvim çalışır; sektör yarışı dört Hang Seng alt endeksiyle koşulur; **tüm piyasa için veri yok, bu yüzden o sayfa gizlenir**.Ne için: Hong Kong endeksleri ve hisseleri üzerinden okunan getiri matrisi ve takvim, dört Hang Seng alt endeksinde sektör yarışı ve ön ayar olarak Hang Seng takip fonları.
+- **ABD**: getiri matrisi ve takvim çalışır; sektör yarışı on SPDR sektör ETF'i ile koşulur; hacim sayfasında yalnızca günlük mod kalır, çünkü dakikalık uç nokta ABD verisi sunmaz; **tutarlar dolar cinsindendir ve tüm piyasa hacmi sayfası gizlenir**.Ne için: ABD endeksleri ve hisseleri üzerinden okunan getiri matrisi ve takvim, on SPDR sektör ETF'i ile sektör yarışı ve SPY, QQQ, DIA gibi geniş ön ayarlar.
+- **Kripto**: yalnızca fiyat alınabilen yerlerde sunulur — iki kaynağı da anakaranın erişimi dışındadır. Seçildiğinde gezinmede altı kripto sayfası kalır ve tüm hisse sayfaları kaldırılır, çünkü onlar hiçbir coin kotasyonu vermeyen bir uç noktayı okur. Fiyatlar ABD doları cinsindendir ve bir coin yılın her günü işlem görür, bu yüzden hiçbir gün eksik değildir.Çin anakarası dışında kripto, telefonda izlenen videolar için açık ara en çok aranan konu ve kendisine ait altı sayfası var: bir coinin mumları, düzenli alım planı, bir pozisyonun getirisi, takvim ve piyasa değeriyle ilgili iki sayfa.
 
 
 
@@ -421,6 +423,80 @@ Tek alım, uzun süre elde tutma — 2015'ten beri aynı varlıktan bir milyon �
 - **İki ilerleme biçimi.** *Aralığın tamamı* tüm dönemi bir anda serer; eğrinin ekrandaki biçimi, zamandaki biçimidir. *Kayan pencere* sabit sayıda işlem gününden oluşan bir pencereyi aralığın başından sonuna kadar yürütür — uzun bir günlük serinin dalgalanmalarını okunur tutmanın tek yolu budur, çünkü on iki yıla yayılmış üç aylık bir düşüş iki pikseldir. Pencere yalnızca kaydırırken anlam taşır ve iki biçim de **aynı fiyatları** okur — geçiş yeniden veri çekmez.
 - **Kayan pencere sonda açılır.** Kapanış bölümü başlarken pencere geriye doğru, aralığın ilk gününe kadar genişler; böylece animasyonun durduğu kare son birkaç on günü değil, aralığın tamamını gösterir.
 - **Sağ kenardaki şerit, genişliği istersen bırakılabilir.** Varsayılan olarak kapalıdır: platform dikey videonun o kenarına avatarını, beğeni ve yorum düğmelerini çizer ve altındaki sayı, burada rahatça okunsa da telefonda gizli kalır. Açıkken tüm aralığı dolduran bir kare, ilk karesinden itibaren karenin kendi kenarına kadar çizer; kayan pencere pencere olduğu sürece mesafeyi korur ve pencereyle birlikte tam genişliğe açılır — yani videonun durduğu kare, kenardan kenara tüm aralıktır.
+
+## Kripto mumlar
+
+![Sayfanın tamamı: solda önizleme, altta oynatma çubuğu, sağda ayarlar.](media/crypto-candle.png)
+
+Bir coin'in günlük mumları, ABD doları cinsinden, herkese açık bir kaynaktan. Haftalık ve aylık mumlar aynı günlerden toplanır.
+
+- Sunulan on iki coin, her iki kaynağın da yıllarca günlük geçmişe sahip olduğu coin'ler. Yukarıdaki kutu satırı yazılana göre daraltır: bu arayüz dilinin yazdığı adla ya da kodla eşleşir — bit de BTC de Bitcoin'i bulur. Seçilmiş bir coin ne yazılırsa yazılsın satırda kalır.
+- **Dönem** — gün, hafta veya ay — hangi serinin çizildiğini değiştirir, bu yüzden değiştirmek yeniden veri getirir. **Stil** ve **Akış** getirmez; sadece burada olanı yeniden çizer.
+- **1, 5 ve 15 dakika** bir aralık değil bir gün ister: bunlardan biri seçildiğinde aralık listesinin yerini tarih seçici alır. Bir dakikalık çözünürlük sekiz gün, diğer ikisi altmış gün geriye gider, daha gerisi yok — bu, kaynağın tuttuğu kadardır, uygulamanın koyduğu bir sınır değil. Bir coin günün her saatinde işlem görür, bu yüzden tek bir gün bile bini aşkın mumdur.
+- Bir coin yılın her günü işlem görür: bir aralığın atlanacak tatili ve eksik günü yoktur; bir coin temettü ödemez ve bölünmez — kapanış *getirinin kendisidir* ve bu altı sayfada hiçbir düzeltme uygulanmaz.
+- Yalnızca yedek kaynağa ulaşılabiliyorsa, günde dört fiyat yerine bir fiyat vardır ve bu durumda mumlar ile çubuklar çizgi olarak çizilir: tek bir kapanıştan yapılmış bir gövde ve iki fitil, coin'in hiç almadığı bir biçimdir. Sayfa bunu, o durumda stil kutusunun altında söyler.
+- Aynı anda en fazla altı coin çizilebilir; yedinci basış kabul edilmez, çünkü yedinci eğri altıncının sahip olduğu rengi alırdı. Karşılaştırıldıklarında kümülatif değişim olarak çizilirler, çünkü coin'ler aynı fiyat aralığında değildir.
+- **Bu altı sayfa yalnızca bir kaynağın yanıt verdiği yerde görünür.** Her iki kaynak da anakaranın erişiminin dışında, bu yüzden oradaki bir makine menüde onları hiç görmez: getiremeyecekleri veriyi sunan altı girdi, başarısız olan altı girdi olurdu. Çin dışında kripto, telefonda izlenen videolar için açık ara en çok aranan konudur ve bu altı sayfa onun için yapıldı: bir coin günün yirmi dört saati, yılın her günü işlem görür; atlanacak tatil günü yoktur.
+
+## Kripto DCA planı
+
+![Sayfanın tamamı: solda önizleme, altta oynatma çubuğu, sağda ayarlar.](media/crypto-dca.png)
+
+Bir coin'i sabit bir ritimle almak — diyelim haftalık veya aylık — ve bu planın bugünkü değeri.
+
+- **Sıklık** ve **Tutar**, ABD doları cinsinden ne sıklıkla ve ne kadar alınacağını söyler. Plan, aralığın kapsadığı her dönemin ilk gününde alır.
+- Çizilen, konulan para ile pozisyonun değeridir; gün gün, alımlar işaretlenmiş olarak: içine alım yaptığınız bir düşüş, yapmadığınız bir düşüşten farklı okunur.
+- En fazla altı plan karşılaştırılabilir. Karşılaştırıldıklarında para olarak değil kümülatif değişim olarak çizilirler, böylece 60.000 dolarlık bir coin ile yarım dolarlık bir coin birbirine karşı okunabilir.
+- Aralık başladıktan sonra listelenen bir coin kendi ilk gününde başlar ve aralıkta hiç fiyatı olmayan bir coin düz bir çizgi olarak çizilmek yerine durum satırında adıyla belirtilir.
+- Buradaki günler takvim günleridir. Bir coin hepsinde işlem görür: haftalık alımla bir yıl yaklaşık 52 alım, aylık alımla 12 alımdır ve iki sayı da yaklaşık değildir.
+
+## Kripto varlık getirisi
+
+![Sayfanın tamamı: solda önizleme, altta oynatma çubuğu, sağda ayarlar.](media/crypto-position.png)
+
+Bir gün bir coin'e konulan bir tutar ve onun bugünkü değeri.
+
+- **Sermaye**, ABD doları cinsinden tutardır; aralık hangi gün girildiğini ve hangi gün durulacağını söyler. Sayfa aralıktaki ilk kapanışta alır ve son kapanışa kadar tutar.
+- Çizilen, pozisyonun gün gün değeridir, konulan paranın karşısında: pozisyon kârdaysa çizgi başlangıç noktasının üstünde, değilse altında durur.
+- Yan yana en fazla altı coin tutulabilir; yedinci basış kabul edilmez. Karşılaştırıldıklarında her biri değer olarak değil kümülatif değişim olarak çizilir, böylece çok farklı fiyatlardan alınmış iki coin birlikte okunabilir.
+- Buradaki günler takvim günleridir ve bir coin hepsinde işlem görür: bir yıl tutmak yaklaşık 365 gündür, bir borsanın vereceği 243 değil.
+- Yalnızca yedek kaynağa ulaşılabiliyorsa, doldurabildiği aralık yaklaşık bir yıldır. Sayfa o zaman aralığın gerçekte nerede başladığını söyler, yazılan tarihten sessizce daha geç başlamak yerine.
+
+## Kripto artış-düşüş takvimi
+
+![Sayfanın tamamı: solda önizleme, altta oynatma çubuğu, sağda ayarlar.](media/crypto-calendar.png)
+
+Güne bir kare, o günün değişimine göre renklendirilmiş.
+
+- **Dolu bir ızgara eksik veri değildir.** Hisse takvimi çoğunlukla boşluklardan oluşur — hafta sonları, tatiller, işlem durdurmaları — ve bir piyasanın göründüğü gibi okunur. Bir coin yılın her günü işlem görür, bu yüzden her kare doludur: görüntü daha uzun değil, daha yoğundur ve eksik bir tatil gibi görünen şey, hiç kapanmayan bir piyasadır.
+- **Aralık** üç, altı veya on iki ay ya da kendi belirlediğiniz bir aralıktır. Kendi aralığınız kaynağın sahip olduğu kadarına kırpılır ve sayfa, yazılan tarihten daha geç başlamak yerine aralığın gerçekte nerede başladığını söyler.
+- İlk kare her zaman %0'dır: aralık içinde önceki bir kapanış yoktur ve onu dışarıdan almak, ilk kareyi takvimin göstermediği bir güne bağımlı kılardı.
+- Renk değişimdir, işlem tutarı değil. Bir coin'in hacmi coin sayısıdır ve bu ızgarada ona göre ölçeklenen hiçbir şey yoktur — takvimin ilgilendiği şey, günün hangi yöne gittiği ve ne kadar gittiğidir.
+- Buradaki günler takvim günleridir. Bu sayfada bir yıl yaklaşık 365 karedir, bir borsanın vereceği 243 değil, ve iki sayı da yaklaşık değildir.
+
+## Kripto piyasa değeri geçmişi
+
+![Sayfanın tamamı: solda önizleme, altta oynatma çubuğu, sağda ayarlar.](media/crypto-caphistory.png)
+
+Bir coin'in dolaşımdaki piyasa değerinin zaman içindeki seyri, altında aynı günlerin fiyatı.
+
+- **İki çizginin ayrıldığı yerde görülen şey arz artışı ve yakımdır.** Fiyat, bir coin'in maliyetidir; piyasa değeri ise o fiyatın var olan coin sayısıyla çarpımıdır. Fiyat çizgisi düşerken piyasa değeri çizgisi yükseliyorsa bu büyüyen arzdır, yanlış bir sayı değil.
+- **Bu ölçülür, dışarı doğru hesaplanmaz.** Bugünkü arzı eski bir fiyatla çarpmak bu sayfayı çizmenin ucuz yoludur ve aynı çizgi olan iki çizgi üretir: piyasa değeri, fiyatın zaten söylediğinden fazlasını söylemezdi. Burada çizilen, günlük dolaşımdaki piyasa değerini taşıyan herkese açık CoinMetrics API'sinden gelir: Bitcoin 2010'a kadar uzanır, diğer coin'ler kaynağın tuttuğu kadar geriye gider.
+- Burada piyasa değeri *dolaşımdaki* değer demektir — halihazırda çıkarılmış ve dolaşımda olan coin'ler, gelecekte var olacak her coin'i varsayan tam seyreltilmiş bir sayım değil.
+- Her coin'in taşıdığı tahmin serisi Haziran 2019'da başlar. Kesin serisi olmayan bir coin orada başlar ve sayfa sessizce daha geç başlamak yerine aralığın gerçekte nerede başladığını söyler.
+- **Aralık** on iki, yirmi dört, altmış veya yüz yirmi ay ya da kendi belirlediğiniz bir aralıktır. Bir coin'in geçmişi istediğiniz aralıktan kısa olabilir — bu kaynağın tabanıdır, başarısız bir çekim değil.
+
+## Kripto piyasa değeri yarışı
+
+![Sayfanın tamamı: solda önizleme, altta oynatma çubuğu, sağda ayarlar.](media/crypto-marketcap.png)
+
+Bugün piyasa değeri en yüksek on beş coin ve bu sıranın gün gün nasıl değiştiği.
+
+- **Alan sorulur, yazılmaz.** Veri çekilirken sayfa, CoinGecko'nun canlı sıralamasından piyasa değerine göre güncel ilk on beşi alır; geçen yıl bu büyüklüğe ulaşan bir coin, kimse liste düzenlemeden tabloda yer alır. Bu yüzden burada coin seçici de yoktur: alanın kendisi yanıttır ve sorulan şey aralıktır.
+- Günlük değerler CoinMetrics'ten, tüm tablo için tek bir istekle gelir. Bu kaynağın tahmin serisidir ve her coin için aynı şekilde Haziran 2019'da başlar, bu yüzden aralık reddedilmek yerine oraya kırpılır: ikisinin sekiz yıl geçmişi, on üçünün hiç geçmişi olmadığı bir tablo, hiçbir yerden çıkıvermiş coin'ler gibi okunurdu.
+- **Stabilcoinler listede kalır.** 2026-10-11 itibarıyla ilk otuzda altı tanesi vardı ve tether bu piyasanın en büyük üçüncü şeyiydi. Onları gizleyen bir tablo, büyüklük dışında bir şeyi sıralardı. Görüntüye yaptıkları dürüstçe: bir dolar bir dolar değerindedir, bu yüzden çizgileri düzdür; tablo böylece buradaki en büyük şeylerden hangilerinin gerçekten hareket ettiğini tek bakışta gösterir.
+- Değer kaynağında bulunmayan bir coin, sıfırda düz çizilmek yerine çıkarılır: bir değer yarışının dibindeki düz çizgi, hiçbir şeye dönüşmüş bir coin gibi okunur. Tablo bu yüzden on beşten az tutabilir ve durum satırı kaç tane alındığını söyler.
+- **Aralık** on iki, yirmi dört veya altmış ay ya da kendi belirlediğiniz bir aralıktır ve aynı şekilde tahmin serisine kırpılır.
 
 ## Video
 

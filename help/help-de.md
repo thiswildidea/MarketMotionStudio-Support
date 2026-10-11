@@ -6,9 +6,11 @@ Diese App macht aus Kennzahlen des A-Aktien-Markts hochformatige Videos für das
 
 In den Einstellungen wird gewählt, aus welchem Markt die App ihre Kurse bezieht; voreingestellt sind A-Aktien. Eine Änderung gilt nach dem Neustart der App.
 
-- **A-Aktien**: alle acht Seiten sind verfügbar.
-- **Hongkong**: Renditematrix und Gewinn-Verlust-Kalender funktionieren; das Sektor-Rennen läuft über die vier Hang-Seng-Subindizes; **eine Umsatzzahl für den Gesamtmarkt gibt es nicht, diese Seite wird ausgeblendet**.
-- **USA**: Renditematrix und Gewinn-Verlust-Kalender funktionieren; das Sektor-Rennen läuft über zehn SPDR-Sektor-ETFs; die Volumenseite behält nur den Tagesmodus, weil der Minuten-Endpunkt keine US-Daten liefert; **Umsätze werden in Dollar angegeben, und die Seite für den Gesamtmarktumsatz ist ausgeblendet**.
+- **Die Wahl wird gespeichert, nicht angewandt.** Auf dem Bildschirm ändert sich nichts, bis die App neu gestartet wird; deshalb steht der entsprechende Hinweis **oben auf der Einstellungsseite**, über den Karten und beim Scrollen dort festgehalten, mit einer Schaltfläche, die die App für Sie neu startet.
+- **A-Aktien**: jede Aktienseite ist verfügbar.Wofür er da ist: der Umsatzfilm für den Gesamtmarkt — der einzige Markt, dessen Quelle ihn meldet — das Sektor-Rennen über die Shenwan-Sektoren erster Ebene, das Rennen der Marktkapitalisierung über die heute größten fünfzehn und die AH-Prämie, die beiden Notierungen ein und desselben Unternehmens gegeneinander.
+- **Hongkong**: Renditematrix und Gewinn-Verlust-Kalender funktionieren; das Sektor-Rennen läuft über die vier Hang-Seng-Subindizes; **eine Umsatzzahl für den Gesamtmarkt gibt es nicht, diese Seite wird ausgeblendet**.Wofür er da ist: Renditematrix und Kalender, gelesen auf Hongkonger Indizes und Werten, das Sektor-Rennen über die vier Hang-Seng-Subindizes und die Hang-Seng-Tracker als Voreinstellungen.
+- **USA**: Renditematrix und Gewinn-Verlust-Kalender funktionieren; das Sektor-Rennen läuft über zehn SPDR-Sektor-ETFs; die Volumenseite behält nur den Tagesmodus, weil der Minuten-Endpunkt keine US-Daten liefert; **Umsätze werden in Dollar angegeben, und die Seite für den Gesamtmarktumsatz ist ausgeblendet**.Wofür er da ist: Renditematrix und Kalender, gelesen auf US-Indizes und -Werten, das Sektor-Rennen über zehn SPDR-Sektor-ETFs und die breiten Voreinstellungen — SPY, QQQ, DIA.
+- **Kryptowährungen**: nur dort angeboten, wo ein Kurs geladen werden kann — beide Quellen liegen außerhalb der Reichweite des Festlands. Wer sie wählt, behält die sechs Krypto-Seiten in der Navigation und verliert jede Aktienseite, denn diese lesen einen Endpunkt, der keine einzige Münze notiert. Preise in US-Dollar, und eine Münze wird an jedem Tag des Jahres gehandelt, es fehlt also kein Tag.Außerhalb Chinas sind Kryptowährungen mit Abstand das gefragteste Thema für ein Video auf dem Handy, und sie bringen sechs eigene Seiten mit: die Kerzen einer Münze, einen Sparplan, die Rendite eines Bestands, den Kalender und zwei Seiten über die Marktkapitalisierung.
 
 
 
@@ -450,6 +452,80 @@ Ein Kauf, lange gehalten — etwa eine Million derselben Aktie seit 2015 — ani
 - **Zwei Ablaufarten.** *Über die ganze Spanne* legt den gesamten Zeitraum auf einmal hin, die Kurve zeigt also ihre echte Form über die Zeit. *Fenster weiterbewegen* hält ein Fenster aus einer festen Zahl von Handelstagen und schiebt es vom Anfang bis zum Ende des Zeitraums — nur so bleiben die Ausschläge einer langen Tagesreihe lesbar: über zwölf Jahre verteilt sind drei Monate Rückgang zwei Pixel. Das Fenster zählt nur beim Weiterbewegen, und beide Arten lesen **dieselben Kurse** — Umschalten lädt nichts neu.
 - **Ein rollendes Fenster öffnet sich am Ende.** Mit Beginn des Schlussteils weitet sich das Fenster zurück bis zum ersten Tag des Zeitraums, also steht am Ende der Animation der ganze Zeitraum da und nicht nur seine letzten Dutzend Tage.
 - **Der Streifen an der rechten Seite kann freigegeben werden, wenn du die Breite willst.** Voreingestellt ist er nicht: Die Plattform zeichnet ihr Profilbild sowie die Schaltflächen für „Gefällt mir“ und Kommentare an diese Seite eines Hochformatvideos, und eine Zahl darunter ist auf dem Telefon verdeckt, obwohl sie hier völlig lesbar ist. Eingeschaltet zeichnet ein Bild, das die ganze Spanne füllt, von seiner ersten Aufnahme an bis zur eigenen Kante des Bildes; ein wanderndes Fenster hält Abstand, solange es ein Fenster ist, und weitet sich zusammen mit dem Fenster auf die volle Breite — das Bild, auf dem das Video anhält, ist also die ganze Spanne von Rand zu Rand.
+
+## Krypto-Kerzen
+
+![Die Seite im Ganzen: Vorschau links, Zeitleiste darunter, Einstellungen rechts.](media/crypto-candle.png)
+
+Die Tageskerzen einer Münze, in US-Dollar, aus einer öffentlichen Quelle. Wochen- und Monatskerzen werden aus denselben Tagen gebildet.
+
+- Die zwölf angebotenen Münzen sind die, zu denen beide Quellen jahrelange Tageshistorie haben. Das Feld darüber grenzt die Zeile auf das Eingetippte ein: Es passt auf den Namen, den diese Oberflächensprache schreibt, oder auf den Code — bit wie BTC findet Bitcoin. Eine bereits gewählte Münze bleibt stehen, egal was eingetippt wurde.
+- **Intervall** — Tag, Woche oder Monat — entscheidet, welche Reihe gezeichnet wird, und lädt daher neu. **Darstellung** und **Ablauf** tun das nicht; sie zeichnen nur neu, was schon hier ist.
+- **1, 5 und 15 Minuten** werden nach einem Tag gefragt, nicht nach einer Spanne: Wer eine davon wählt, bekommt statt der Spanne eine Datumsauswahl. Die Ein-Minuten-Auflösung reicht acht Tage zurück, die beiden anderen sechzig, und nicht weiter — so viel hält die Quelle, nicht so viel diese Anwendung erlaubt. Ein Coin handelt rund um die Uhr, also ist ein einziger Tag schon über tausend Kerzen.
+- Eine Münze wird an jedem Tag des Jahres gehandelt: Ein Zeitraum hat keine Feiertage zu überspringen und keinen fehlenden Tag. Eine Münze zahlt weder Dividende noch splittet sie — der Schlusskurs *ist* die Rendite, und auf diesen sechs Seiten wird nirgends bereinigt.
+- Wenn nur die Ersatzquelle erreichbar ist, hat sie einen Kurs pro Tag statt vier, und Kerzen und Balken werden dann als Linie gezeichnet: Ein Körper mit zwei Dochten aus einem einzigen Schlusskurs ist eine Form, die die Münze nie hatte. Die Seite sagt das unter dem Darstellungsfeld, wenn es so ist.
+- Bis zu sechs Münzen lassen sich gleichzeitig zeichnen; ein siebter Druck wird nicht angenommen, denn eine siebte Kurve nähme eine Farbe, die die sechste schon hat. Im Vergleich werden sie als kumulative Veränderung gezeichnet, weil die Münzen nicht in derselben Größenordnung notieren.
+- **Diese sechs Seiten erscheinen nur, wo eine Quelle antwortet.** Beide Quellen liegen außerhalb der Reichweite des chinesischen Festlands; ein Rechner dort bekommt sie im Menü schlicht nicht — sechs Einträge, die Daten anbieten, die sie nicht holen können, wären sechs Einträge, die scheitern. Außerhalb Chinas sind Kryptowährungen mit Abstand das gefragteste Thema für ein Handy-Video, und genau dafür sind diese sechs Seiten da: Eine Münze wird rund um die Uhr gehandelt, an jedem Tag des Jahres, ohne übersprungenen Feiertag.
+
+## Krypto-Sparplan
+
+![Die Seite im Ganzen: Vorschau links, Zeitleiste darunter, Einstellungen rechts.](media/crypto-dca.png)
+
+Eine Münze in festem Rhythmus kaufen — etwa wöchentlich oder monatlich — und was dieser Plan heute wert ist.
+
+- **Rhythmus** und **Betrag** sagen, wie oft und wie viel, in US-Dollar. Der Plan kauft am ersten Tag jedes Zeitraums, den die Spanne umfasst.
+- Gezeichnet wird das eingezahlte Geld gegen den Wert des Bestands, Tag für Tag, mit markierten Käufen: Ein Rückgang, in den hineingekauft wurde, liest sich anders als einer, in den nicht hineingekauft wurde.
+- Bis zu sechs Pläne lassen sich vergleichen. Im Vergleich werden sie als kumulative Veränderung gezeichnet statt als Geld, damit sich eine Münze zu 60.000 Dollar und eine zu einem halben Dollar gegeneinander lesen lassen.
+- Eine Münze, die erst nach Beginn der Spanne gelistet wurde, beginnt an ihrem eigenen ersten Tag, und eine Münze ohne Kurs in der ganzen Spanne wird auf der Statuszeile genannt statt als flache Linie gezeichnet.
+- Tage sind hier Kalendertage. Eine Münze wird an jedem gehandelt: Ein Jahr wöchentlichen Kaufens sind etwa 52 Käufe, ein Jahr monatlichen Kaufens 12, und keine der beiden Zahlen ist geschätzt.
+
+## Ertrag der Krypto-Bestände
+
+![Die Seite im Ganzen: Vorschau links, Zeitleiste darunter, Einstellungen rechts.](media/crypto-position.png)
+
+Ein Betrag, an einem Tag in eine Münze gelegt, und was er heute wert ist.
+
+- **Kapital** ist der Betrag in US-Dollar; die Spanne nennt den Tag des Einstiegs und den Tag, an dem Schluss ist. Die Seite kauft zum ersten Schlusskurs der Spanne und hält bis zum letzten.
+- Gezeichnet wird der Wert des Bestands Tag für Tag gegen das eingezahlte Geld: Die Linie liegt über ihrem Startpunkt, solange der Bestand im Plus ist, und darunter, wenn nicht.
+- Bis zu sechs Münzen lassen sich nebeneinander halten; ein siebter Druck wird nicht angenommen. Im Vergleich wird jede als kumulative Veränderung gezeichnet statt als Wert, damit zwei zu ganz unterschiedlichen Kursen gekaufte Münzen zusammen lesbar sind.
+- Tage sind hier Kalendertage, und eine Münze wird an jedem gehandelt: Ein Jahr Halten sind etwa 365 Tage, nicht die 243, die eine Börse gäbe.
+- Wenn nur die Ersatzquelle erreichbar ist, reicht ihre Spanne etwa ein Jahr. Die Seite sagt dann, wo die Spanne wirklich beginnt, statt still später anzufangen als das eingegebene Datum.
+
+## Krypto-Gewinnkalender
+
+![Die Seite im Ganzen: Vorschau links, Zeitleiste darunter, Einstellungen rechts.](media/crypto-calendar.png)
+
+Ein Feld pro Tag, gefärbt nach der Veränderung dieses Tages.
+
+- **Ein volles Raster ist keine fehlenden Daten.** Ein Aktienkalender besteht meist aus Lücken — Wochenenden, Feiertage, Aussetzungen — und liest sich so, wie ein Markt aussieht. Eine Münze wird an jedem Tag des Jahres gehandelt, also ist jedes Feld gefüllt: Das Bild ist dichter statt länger, und was wie ein fehlender Feiertag aussieht, ist ein Markt, der nie schließt.
+- **Zeitraum** sind drei, sechs oder zwölf Monate oder eine eigene Spanne. Eine eigene Spanne wird auf das zugeschnitten, was die Quelle hat, und die Seite sagt, wo der Zeitraum wirklich beginnt, statt später anzufangen als das eingegebene Datum.
+- Das erste Feld ist immer 0 %: Es gibt keinen vorherigen Schlusskurs innerhalb der Spanne, und einen außerhalb zu holen würde das erste Feld von einem Tag abhängig machen, den der Kalender nicht zeigt.
+- Die Farbe ist die Veränderung, nicht der gehandelte Betrag. Das Volumen einer Münze ist eine Stückzahl, und nichts in diesem Raster wird daran skaliert — worum es dem Kalender geht, ist wohin der Tag ging und wie weit.
+- Tage sind hier Kalendertage. Ein Jahr auf dieser Seite sind etwa 365 Felder, nicht die 243, die eine Börse gäbe, und keine der beiden Zahlen ist geschätzt.
+
+## Krypto-Marktkapitalisierung im Verlauf
+
+![Die Seite im Ganzen: Vorschau links, Zeitleiste darunter, Einstellungen rechts.](media/crypto-caphistory.png)
+
+Die zirkulierende Marktkapitalisierung einer Münze im Verlauf, darunter der Kurs über dieselben Tage.
+
+- **Wo die beiden Linien auseinanderlaufen, sieht man Ausgabe und Verbrennung.** Der Kurs ist, was eine Münze kostet; die Kapitalisierung ist dieser Kurs mal der Anzahl existierender Münzen. Eine Kapitalisierungslinie, die steigt, während die Kurslinie fällt, ist wachsendes Angebot, keine falsche Zahl.
+- **Das ist gemessen, nicht hochgerechnet.** Den heutigen Bestand mit einem alten Kurs zu multiplizieren ist der billige Weg, diese Seite zu zeichnen, und er liefert zwei Linien, die dieselbe Linie sind — die Kapitalisierung sagte dann nichts, was der Kurs nicht schon sagt. Gezeichnet wird hier, was aus der öffentlichen CoinMetrics-Schnittstelle kommt, die eine tägliche zirkulierende Kapitalisierung führt: Bitcoin reicht bis 2010 zurück, andere Münzen so weit, wie die Quelle sie hält.
+- Marktkapitalisierung bedeutet hier die *zirkulierende* — die bereits ausgegebenen und im Umlauf befindlichen Münzen, nicht eine voll verwässerte Zahl, die jede jemals existierende Münze annimmt.
+- Die Schätzreihe, die jede Münze hat, beginnt im Juni 2019. Eine Münze ohne exakte Reihe beginnt dort, und die Seite sagt, wo der Zeitraum wirklich anfängt, statt still später zu beginnen.
+- **Zeitraum** sind zwölf, vierundzwanzig, sechzig oder hundertzwanzig Monate oder eine eigene Spanne. Die Historie einer Münze kann kürzer sein als die verlangte Spanne — das ist die Untergrenze der Quelle, kein fehlgeschlagener Abruf.
+
+## Rennen der Krypto-Marktkapitalisierung
+
+![Die Seite im Ganzen: Vorschau links, Zeitleiste darunter, Einstellungen rechts.](media/crypto-marketcap.png)
+
+Die fünfzehn Münzen mit der größten Marktkapitalisierung heute und wie sich diese Ordnung Tag für Tag bewegte.
+
+- **Das Teilnehmerfeld wird gefragt, nicht aufgeschrieben.** Beim Abruf nimmt die Seite die aktuellen fünfzehn größten nach Marktwert aus der Live-Rangliste von CoinGecko; eine Münze, die letztes Jahr in diese Größe gewachsen ist, steht also auf dem Tableau, ohne dass jemand eine Liste pflegt. Deshalb gibt es hier auch keine Münzauswahl: Das Feld selbst ist die Antwort, und gefragt wird nach der Spanne.
+- Die Tageswerte kommen von CoinMetrics, eine Anfrage für das ganze Tableau. Es ist die Schätzreihe dieser Quelle, die für jede Münze gleich im Juni 2019 beginnt; die Spanne wird deshalb dort beschnitten statt abgelehnt — ein Tableau, auf dem zwei Münzen acht Jahre Historie hätten und dreizehn keine, läse sich wie Münzen, die aus dem Nichts auftauchten.
+- **Stablecoins bleiben darauf.** Gemessen am 2026-10-11 trugen die oberen Dreißig sechs von ihnen, und Tether war das drittgrößte Ding auf diesem Markt. Ein Tableau, das sie versteckte, würde etwas anderes als Größe rangieren. Was sie mit dem Bild machen, ist ehrlich: Ihre Linie ist flach, weil ein Dollar einen Dollar wert ist — das Tableau zeigt also auf einen Blick, welche der größten Dinge hier sich wirklich bewegen.
+- Eine Münze, die die Wertquelle nicht führt, wird weggelassen statt flach bei null gezeichnet: Eine flache Linie am unteren Rand eines Wertrennens liest sich wie eine Münze, die auf nichts hinauslief. Das Tableau kann also weniger als fünfzehn halten, und die Statuszeile sagt, wie viele es wurden.
+- **Zeitraum** sind zwölf, vierundzwanzig oder sechzig Monate oder eine eigene Spanne, auf dieselbe Weise an die Schätzreihe beschnitten.
 
 ## Video
 

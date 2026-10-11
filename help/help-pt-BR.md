@@ -6,9 +6,11 @@ Este aplicativo transforma indicadores do mercado de ações A em vídeos vertic
 
 Em Configurações escolhe-se de qual mercado o app obtém suas cotações; ações A por padrão. A mudança vale após reiniciar o app.
 
-- **Ações A**: as oito páginas estão disponíveis.
-- **Hong Kong**: a matriz de retorno e o calendário funcionam; a corrida de setores usa os quatro subíndices Hang Seng; **não há número para o mercado inteiro, então essa página fica oculta**.
-- **Estados Unidos**: a matriz de retorno e o calendário funcionam; a corrida de setores usa dez ETFs setoriais SPDR; a página de volume mantém só o modo diário, porque o endpoint de minutos não serve dados americanos; **os valores estão em dólares e a página de volume do mercado fica oculta**.
+- **A escolha é guardada, não aplicada.** Nada muda no ecrã até a aplicação ser reiniciada, por isso a linha que o diz aparece **no topo da página de definições**, acima dos cartões e fixa ali enquanto se desloca, com um botão que reinicia a aplicação por si.
+- **Ações A**: todas as páginas de ações estão disponíveis.Para que serve: o filme do volume de todo o mercado — o único mercado cuja fonte o publica — a corrida de setores sobre os setores Shenwan de primeiro nível, a corrida de capitalização sobre as quinze maiores de hoje e o prémio AH, as duas cotações da mesma empresa frente a frente.
+- **Hong Kong**: a matriz de retorno e o calendário funcionam; a corrida de setores usa os quatro subíndices Hang Seng; **não há número para o mercado inteiro, então essa página fica oculta**.Para que serve: a matriz de retorno e o calendário lidos sobre índices e valores de Hong Kong, a corrida de setores sobre os quatro subíndices Hang Seng e os trackers Hang Seng como predefinições.
+- **Estados Unidos**: a matriz de retorno e o calendário funcionam; a corrida de setores usa dez ETFs setoriais SPDR; a página de volume mantém só o modo diário, porque o endpoint de minutos não serve dados americanos; **os valores estão em dólares e a página de volume do mercado fica oculta**.Para que serve: a matriz de retorno e o calendário lidos sobre índices e valores americanos, a corrida de setores sobre dez ETFs setoriais SPDR e as grandes predefinições — SPY, QQQ, DIA.
+- **Criptomoedas**: oferecido apenas onde um preço pode ser obtido — suas duas fontes estão fora do alcance do continente. Escolhê-lo mantém as seis páginas cripto na navegação e remove todas as páginas de ações, porque estas leem um endpoint que não cota nenhuma moeda. Os preços estão em dólares americanos e uma moeda é negociada todos os dias do ano, então nenhum dia falta.Fora da China continental, as criptomoedas são de longe o tema mais procurado para um vídeo no telefone, e trazem seis páginas próprias: as velas de uma moeda, um plano de compra periódica, o retorno de uma posição, o calendário e duas páginas de capitalização.
 
 
 
@@ -436,6 +438,80 @@ Uma compra, mantida — um milhão do mesmo ativo desde 2015 — animada para mo
 - **Dois modos de avanço.** *Todo o período* dispõe o intervalo inteiro de uma vez, então a forma da curva na tela é a sua forma no tempo. *Janela deslizante* mantém uma janela de um número fixo de dias de negociação e a percorre do início ao fim do intervalo — é a única forma de uma longa série diária manter as oscilações legíveis, porque espalhada por doze anos uma queda de três meses são dois pixels. A janela só conta ao deslizar, e os dois modos leem **os mesmos dados**: trocar não baixa nada de novo.
 - **Uma janela rolante se abre no final.** No início do trecho de encerramento a janela se alarga para trás até o primeiro dia do intervalo, portanto o quadro em que a animação para é o intervalo inteiro, e não suas últimas dezenas de dias.
 - **A faixa do lado direito pode ser cedida, se você quiser a largura.** Ela vem desligada: a plataforma desenha seu avatar e os botões de curtir e comentar desse lado de um vídeo vertical, e um número sob eles fica escondido no celular, embora aqui esteja perfeitamente legível. Ativada, um quadro que preenche todo o intervalo desenha até a própria borda do quadro desde o primeiro quadro; uma janela rolante continua mantendo distância enquanto é uma janela e se abre para a largura total junto com a janela — então o quadro em que o vídeo para é o intervalo inteiro, de borda a borda.
+
+## Velas cripto
+
+![A página inteira: pré-visualização à esquerda, barra de reprodução abaixo, ajustes à direita.](media/crypto-candle.png)
+
+As velas diárias de uma moeda, em dólares americanos, de uma fonte pública. As semanais e mensais são agrupadas a partir desses mesmos dias.
+
+- As doze moedas oferecidas são as que ambas as fontes têm com anos de histórico diário. A caixa acima estreita a linha ao que for digitado: corresponde ao nome que este idioma da interface escreve ou ao código — bit e BTC encontram Bitcoin. Uma moeda já escolhida continua na linha independentemente do que for digitado.
+- **Intervalo** — dia, semana ou mês — muda qual série é desenhada, então mudá-lo busca de novo. **Estilo** e **Animação** não; eles apenas redesenhå o que já está aqui.
+- **1, 5 e 15 minutos** são pedidos por um dia, não por um intervalo: escolher um deles troca a lista de intervalos por um seletor de data. O grão de um minuto alcança oito dias, os outros dois sessenta, e não mais — é o quanto a fonte guarda, não um limite que este aplicativo imponha. Uma cripto negocia a todas as horas, então um único dia já passa de mil candles.
+- Uma moeda é negociada todos os dias do ano: um intervalo não tem feriado para pular nem dia faltando, e uma moeda não paga dividendo nem sofre desdobramento: o fechamento *é* o retorno, e nenhum ajuste é aplicado nestas seis páginas.
+- Quando só a fonte reserva é alcançável, ela tem um preço por dia em vez de quatro, e então velas e barras são desenhadas como linha: um corpo com dois pavios feito de um único fechamento é uma forma que a moeda nunca teve. A página diz isso sob a lista de estilo quando é esse o caso.
+- Até seis moedas podem ser desenhadas ao mesmo tempo; um sétimo toque não é aceito, porque uma sétima curva tomaria uma cor que a sexta já tem. Comparadas, são desenhadas como variação acumulada, já que as moedas não têm preços na mesma escala.
+- **Estas seis páginas aparecem apenas onde uma fonte responde.** Ambas as fontes estão fora do alcance da China continental, então uma máquina lá simplesmente não as recebe no menu: seis itens oferecendo dados que não conseguem buscar seriam seis itens que falham. Fora da China, as criptomoedas são de longe o tema mais procurado para um vídeo no telefone, e estas seis páginas são feitas para isso: uma moeda é negociada vinte e quatro horas por dia, todos os dias do ano, sem feriado a saltar.
+
+## Plano DCA cripto
+
+![A página inteira: pré-visualização à esquerda, barra de reprodução abaixo, ajustes à direita.](media/crypto-dca.png)
+
+Comprar uma moeda em ritmo fixo — semanal, digamos, ou mensal — e quanto esse plano vale hoje.
+
+- **Frequência** e **Valor** dizem com que frequência e quanto, em dólares americanos. O plano compra no primeiro dia de cada período coberto pelo intervalo.
+- O que se desenha é o dinheiro colocado contra o valor da posição, dia a dia, com as compras marcadas: uma queda em que você comprou se lê de forma diferente de uma em que não comprou.
+- Até seis planos podem ser comparados. Comparados, são desenhados como variação acumulada em vez de dinheiro, para que uma moeda a 60 mil dólares e outra a meio dólar possam ser lidas uma contra a outra.
+- Uma moeda listada depois do início do intervalo começa no seu próprio primeiro dia, e uma moeda sem preço em todo o intervalo é nomeada na linha de status em vez de desenhada como uma linha reta.
+- Os dias aqui são dias corridos. Uma moeda é negociada em todos eles: um ano de compras semanais dá cerca de 52 compras e um de compras mensais, 12, e nenhum dos dois números é aproximado.
+
+## Retorno da carteira cripto
+
+![A página inteira: pré-visualização à esquerda, barra de reprodução abaixo, ajustes à direita.](media/crypto-position.png)
+
+Uma quantia colocada em uma moeda em um dia, e quanto vale hoje.
+
+- **Capital** é a quantia, em dólares americanos; o intervalo diz o dia em que entrou e o dia de parar. A página compra no primeiro fechamento do intervalo e mantém até o último.
+- O que se desenha é o valor da posição dia a dia contra o dinheiro colocado: a linha fica acima do ponto de partida enquanto a posição está no lucro e abaixo quando não está.
+- Até seis moedas podem ser mantidas lado a lado; um sétimo toque não é aceito. Comparadas, cada uma é desenhada como variação acumulada em vez de valor, para que duas moedas compradas a preços muito diferentes possam ser lidas juntas.
+- Os dias aqui são dias corridos, e uma moeda é negociada em todos eles: um ano de manutenção são cerca de 365 dias, não os 243 que uma bolsa daria.
+- Quando só a fonte reserva é alcançável, o intervalo que ela consegue preencher é de cerca de um ano. A página diz então onde o intervalo realmente começa, em vez de começar silenciosamente mais tarde do que a data digitada.
+
+## Calendário de altas e baixas cripto
+
+![A página inteira: pré-visualização à esquerda, barra de reprodução abaixo, ajustes à direita.](media/crypto-calendar.png)
+
+Um quadrado por dia, colorido pela variação daquele dia.
+
+- **Uma grade cheia não é dado faltando.** Um calendário de ações é feito principalmente de buracos — fins de semana, feriados, suspensões — e se lê como um mercado se parece. Uma moeda é negociada todos os dias do ano, então todo quadrado está preenchido: a imagem é mais densa, não mais longa, e o que parece um feriado faltando é um mercado que nunca fecha.
+- **Intervalo** é três, seis ou doze meses, ou um período próprio. Um período próprio é cortado para o que a fonte tem, e a página diz onde o intervalo realmente começa, em vez de começar mais tarde do que a data digitada.
+- O primeiro quadrado é sempre 0 %: não há fechamento anterior dentro do intervalo, e buscá-lo fora faria o primeiro quadrado depender de um dia que o calendário não mostra.
+- A cor é a variação, não o valor negociado. O volume de uma moeda é uma contagem de moedas, e nada nesta grade é escalado contra ele — do que o calendário trata é para que lado o dia foi e quanto.
+- Os dias aqui são dias corridos. Um ano nesta página é cerca de 365 quadrados, não os 243 que uma bolsa daria, e nenhum dos dois números é aproximado.
+
+## Histórico de capitalização cripto
+
+![A página inteira: pré-visualização à esquerda, barra de reprodução abaixo, ajustes à direita.](media/crypto-caphistory.png)
+
+A capitalização circulante de uma moeda ao longo do tempo, com o preço dos mesmos dias abaixo.
+
+- **Onde as duas linhas se separam, está a emissão e a queima.** O preço é quanto custa uma moeda; a capitalização é esse preço vezes a quantidade de moedas existentes. Uma linha de capitalização que sobe enquanto a do preço cai é oferta crescendo, não um número errado.
+- **Isso é medido, não extrapolado.** Multiplicar a oferta de hoje por um preço antigo é o caminho barato de desenhar esta página, e produz duas linhas que são a mesma linha: a capitalização não diria nada que o preço já não diga. O que se desenha aqui vem da API pública da CoinMetrics, que traz uma capitalização circulante diária: o Bitcoin chega a 2010, as demais moedas até onde a fonte as mantém.
+- Aqui capitalização significa a *circulante* — as moedas já emitidas e em circulação, não uma contagem totalmente diluída que pressupõe todas as moedas que existirão.
+- A série estimada que cada moeda tem começa em junho de 2019. Uma moeda sem série exata começa ali, e a página diz onde o intervalo realmente começa, em vez de começar silenciosamente mais tarde.
+- **Intervalo** é doze, vinte e quatro, sessenta ou cento e vinte meses, ou um período próprio. A história de uma moeda pode ser mais curta do que o intervalo pedido — esse é o piso da fonte, não uma busca que falhou.
+
+## Corrida de capitalização cripto
+
+![A página inteira: pré-visualização à esquerda, barra de reprodução abaixo, ajustes à direita.](media/crypto-marketcap.png)
+
+As quinze moedas com a maior capitalização hoje e como essa ordem se moveu dia a dia.
+
+- **O campo é perguntado, não escrito.** Na busca, a página pega as quinze maiores por valor de mercado do ranking ao vivo da CoinGecko; uma moeda que cresceu até esse tamanho no ano passado está na tabela sem que ninguém edite uma lista. É por isso também que não há seletor de moeda aqui: o campo é a resposta, e o que se pergunta é o período.
+- Os valores diários vêm da CoinMetrics, um único pedido para toda a tabela. É a série estimada dessa fonte, que começa em junho de 2019 igualmente para todas, então o intervalo é cortado ali em vez de recusado: uma tabela em que duas moedas tivessem oito anos de história e treze nenhuma se leria como moedas que apareceram do nada.
+- **Stablecoins ficam.** Medido em 2026-10-11, as trinta primeiras tinham seis delas, e tether era a terceira maior coisa deste mercado. Uma tabela que as escondesse estaria ordenando outra coisa que não tamanho. O que fazem com a imagem é honesto: sua linha é reta, porque um dólar vale um dólar, então a tabela mostra de relance quais das maiores coisas aqui realmente se movem.
+- Uma moeda que a fonte de valores não tem é descartada em vez de desenhada reta no zero: uma linha reta no fundo de uma corrida de valor se lê como uma moeda que foi a nada. A tabela pode, portanto, ter menos de quinze, e a linha de status diz quantas vieram.
+- **Intervalo** é doze, vinte e quatro ou sessenta meses, ou um período próprio, cortado para a série estimada do mesmo modo.
 
 ## Vídeo
 
